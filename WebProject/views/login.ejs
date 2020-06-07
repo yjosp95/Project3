@@ -1,0 +1,153 @@
+<style>
+.out{
+	width:100%;
+	    text-align: center;
+}
+.in{
+	display:inline-block;
+     text-align: center;
+		 width:30%
+}
+</style>
+
+
+<html lang="en">
+	<head>
+		<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<title>HnB - JoinForm</title>
+
+		<!-- Google font -->
+ 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+ 		<!-- Bootstrap -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/bootstrap.min.css"/>
+
+ 		<!-- Slick -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/slick.css"/>
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/slick-theme.css"/>
+
+ 		<!-- nouislider -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/nouislider.min.css"/>
+
+ 		<!-- Font Awesome Icon -->
+ 		<link rel="stylesheet" href="/electro/css/font-awesome.min.css">
+
+ 		<!-- Custom stlylesheet -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/style.css"/>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    </head>
+	<body>
+		<header>
+			<div id="header">
+					<div class="row text-center">
+								<span style="color:white; font-size:4em;" class="logo">#Sell Phone</span>
+						</div>
+					</div>
+		</header>
+
+		<nav id="navigation">
+		</nav>
+
+
+
+
+			<!-- container -->
+				<!-- row -->
+				<div class="row out">
+					<div class="in">
+
+						<div class="billing-details">
+							<div class="section-title">
+							</div>
+
+              <div class="form-group">
+								<input class="input" type="text" name="ID" placeholder="아이디">
+							</div>
+
+              <div class="form-group">
+								<input class="input" type="password" name="password" placeholder="비밀번호">
+                </div>
+
+                <div class="product-details">
+                  <div class="add-to-cart">
+
+										<a style="color: #8D99AE" id="join" href="/joinform"><b>회원가입</b></a>
+										<span class="bar" aria-hidden="true">|</span>
+                    <button class="add-to-cart-btn"><i class="fa fa-user-o"></i>로그인</button>
+
+									</div>
+                </div>
+
+                <div id="product-tab">
+                  <ul class="tab-nav">
+                    <li><a style="tab">간편 로그인</a></li>
+                  </ul>
+                </div>
+
+								<div id="naverIdLogin"></div>
+								<!-- //네이버아이디로로그인 버튼 노출 영역 -->
+
+								<!-- 네이버아디디로로그인 초기화 Script -->
+								<script type="text/javascript">
+									var naverLogin = new naver.LoginWithNaverId(
+										{
+											clientId: "aQGmEZCIkzTNZXAl3oNY",
+											callbackUrl: "http://localhost:3000/test",
+											isPopup: false, /* 팝업을 통한 연동처리 여부 */
+											loginButton: {color: "white", type: 3, height: 60} /* 로그인 버튼의 타입을 지정 */
+										}
+									);
+
+									/* 설정정보를 초기화하고 연동을 준비 */
+									naverLogin.init();
+
+								</script>
+
+
+
+
+
+
+						</div>
+			</div>
+		</div>
+
+		<br>
+		<footer id="footer">
+			<div id="bottom-footer" class="section">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<span class="copyright">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy HnB
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/slick.min.js"></script>
+		<script src="js/nouislider.min.js"></script>
+		<script src="js/jquery.zoom.min.js"></script>
+		<script src="js/main.js"></script>
+		<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+
+	</body>
+</html>
