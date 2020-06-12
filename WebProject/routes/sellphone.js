@@ -9,7 +9,7 @@ var pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   database: 'tutorial',
-  password: '960315wjd!'
+  password: ''
 });
 
 var multer = require('multer');
