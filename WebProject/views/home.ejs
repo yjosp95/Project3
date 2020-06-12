@@ -45,7 +45,7 @@
 						<li><div style="color:white">셀폰 - 중고 휴대폰 개인 거래</div></li>
 					</ul>
 					<ul class="header-links pull-right">
-						<li><a href="#">로그인</a></li>
+						<li><a href="/login">로그인</a></li>
 						<li><a href="#">고객센터</a></li>
 					</ul>
 				</div>
@@ -61,7 +61,7 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="#" class="logo">
+								<a href="/sellphone/home" class="logo">
 									<img src="/electro/img/my_logo.png" alt="">
 								</a>
 							</div>
@@ -71,14 +71,16 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
-									<select class="input-select">
-										<option value="0">Sell Phone</option>
-										<option value="1">Category 01</option>
-										<option value="1">Category 02</option>
+								<form action="/sellphone/search" method="post" onsubmit="return onWriteSubmit()">
+									<select name="category" class="input-select">
+										<option value="ALL">ALL</option>
+										<option value="SAMSUNG">SAMSUNG</option>
+										<option value="APPLE">APPLE</option>
+										<option value="LG">LG</option>
+										<option value="ETC">ETC</option>
 									</select>
-									<input class="input" placeholder="HnB">
-									<button class="search-btn">Search</button>
+									<input name="target" class="input" placeholder="HnB">
+									<button type="submit" class="search-btn">Search</button>
 								</form>
 							</div>
 						</div>
@@ -124,219 +126,18 @@
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-
-					<!-- 1170 * 400 -->
-                     <a href="#"><img src="/electro/img/test.png" width="100%" height="100%" alt="" /></a>
-
 					<!-- STORE -->
 					<div id="store" class="col-md-12">
 						<!-- store products -->
-						<div class="row">
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="/electro/img/product01.png" alt="">
-										<div class="product-label">
-											<span class="sale">SAFETY</span>
-											<span class="new">NEW</span>
-										</div>
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>jjim</button>
-									</div>
-								</div>
-							</div>
-							<!-- /product -->
-
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="/electro/img/product02.png" alt="">
-										<div class="product-label">
-											<span class="new">NEW</span>
-										</div>
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-									</div>
-								</div>
-							</div>
-							<!-- /product -->
-
-							<div class="clearfix visible-sm visible-xs"></div>
-
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="/electro/img/product03.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-									</div>
-								</div>
-							</div>
-							<!-- /product -->
-
-							<div class="clearfix visible-lg visible-md"></div>
-
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="/electro/img/product01.png" alt="">
-										<div class="product-label">
-											<span class="sale">SAFETY</span>
-											<span class="new">NEW</span>
-										</div>
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>jjim</button>
-									</div>
-								</div>
-							</div>
-                            <!-- /product -->
-
-                            <div class="clearfix visible-sm visible-xs"></div>
-
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="/electro/img/product02.png" alt="">
-										<div class="product-label">
-											<span class="new">NEW</span>
-										</div>
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-									</div>
-								</div>
-							</div>
-							<!-- /product -->
-
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="/electro/img/product03.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-									</div>
-								</div>
-							</div>
-							<!-- /product -->
-
-							<div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>
-
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="/electro/img/product01.png" alt="">
-										<div class="product-label">
-											<span class="sale">SAFETY</span>
-											<span class="new">NEW</span>
-										</div>
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>jjim</button>
-									</div>
-								</div>
-							</div>
-                            <!-- /product -->
-
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="/electro/img/product02.png" alt="">
-										<div class="product-label">
-											<span class="new">NEW</span>
-										</div>
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-									</div>
-								</div>
-							</div>
-							<!-- /product -->
-
-							<div class="clearfix visible-sm visible-xs"></div>
-
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="/electro/img/product03.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-									</div>
-								</div>
-							</div>
-							<!-- /product -->
-						</div>
+						<input type="hidden" value="<%=product%>" id='html_product'/>
+						<div id='product_list'></div>
 						<!-- /store products -->
 
 						<!-- store bottom filter -->
 						<div class="store-filter clearfix">
 							<ul class="store-pagination">
-                                <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-								<li class="active">1</li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-								<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+								<input type="hidden" value="<%=page%>" id='html_page'/>
+								<div id='page_list'></div>
 							</ul>
 						</div>
 						<!-- /store bottom filter -->
@@ -372,10 +173,10 @@
 							<div class="footer">
 								<h3 class="footer-title">Categories</h3>
 								<ul class="footer-links">
-									<li><a href="#">Samsung</a></li>
-									<li><a href="#">Apple</a></li>
-									<li><a href="#">LG</a></li>
-									<li><a href="#">기타</a></li>
+									<li><a href="/sellphone/search/?q=&page=1&category=SAMSUNG">Samsung</a></li>
+									<li><a href="/sellphone/search/?q=&page=1&category=APPLE">Apple</a></li>
+									<li><a href="/sellphone/search/?q=&page=1&category=LG">LG</a></li>
+									<li><a href="/sellphone/search/?q=&page=1&category=ETC">ETC</a></li>
 								</ul>
 							</div>
 						</div>
@@ -440,5 +241,17 @@
 		<script src="/electro/js/jquery.zoom.min.js"></script>
 		<script src="/electro/js/main.js"></script>
 
+		<script>
+			var html_product = document.getElementById('html_product').value;
+			var product_list = document.getElementById('product_list');
+			
+			product_list.innerHTML = html_product;
+
+			var html_page = document.getElementById('html_page').value;
+			var page_list = document.getElementById('page_list');
+			
+			page_list.innerHTML = html_page;
+			
+		</script>
 	</body>
 </html>

@@ -20,25 +20,150 @@ var multer = require('multer');
 
 /* GET EMPTY URL ==> HOME URL */
 router.get('/', function(req, res, next) {
-    res.redirect('/sellphone/home');
+  res.redirect('/sellphone/home');
 });
 /* END : GET EMPTY URL */
 
 /* GET HOME URL */
 router.get('/home', function(req, res, next) {
-  pool.getConnection(function(err, connection){
 
-    var sqlForSelectList = 'SELECT idx, creator_id, title, hit FROM board'
-    connection.query(sqlForSelectList, function(err, rows){
-      if(err) console.log(err);
+var idx_page = req.query.page;
+idx_page = Math.round(idx_page);
 
-      res.render('home', {row: rows});
-      connection.release();
-    });
+if(isNaN(idx_page))
+  idx_page = 1;
+
+console.log('test : ' + idx_page);
+
+pool.getConnection(function(err, connection){
+
+  var sqlForSelectList = 'SELECT product_title, product_price, product_manufacturer FROM product_list'
+  connection.query(sqlForSelectList, function(err, rows){
+    if(err) console.log(err);
+
+    var num_product = rows.length;
+    var num_page = Math.ceil(num_product / 9);
+
+    if(idx_page > num_page)
+      idx_page = 1;
+
+    // Make Product List
+    var html_product = `<div class="row">\n`;
+    var i_start = 9 * (idx_page-1);
+    var i_end = i_start;
+
+    if(num_product-9 > i_start)
+      i_end = i_end + 9;
+    else
+      i_end = i_end + num_product - i_start;
+
+    var i = i_start;
+
+    while(i < i_end)
+    {
+      html_product = html_product + 
+      ` <!-- product -->
+        <div class="col-md-4 col-xs-6">
+          <div class="product">
+            <div class="product-img">
+              <img src="/electro/img/product01.png" alt="">
+              <div class="product-label">`;
+
+                //<span class="sale">SAFETY</span>
+                //<span class="new">NEW</span>
+
+      html_product = html_product + `
+              </div>
+            </div>
+            <div class="product-body">
+              <p class="product-category">${rows[i].product_manufacturer}</p>
+              <h3 class="product-name"><a href="#">${rows[i].product_title}</a></h3>
+              <h4 class="product-price">${rows[i].product_price}원</h4>
+            </div>
+            <div class="add-to-cart">
+              <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>찜하기</button>
+            </div>
+          </div>
+        </div>
+        <!-- /product -->`;
+      
+      gap = i_start - i;
+
+      if(gap > 0)
+      {
+        if(gap % 6 == 0)
+          html_product = html_product + `<div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>`;
+        else if(gap % 3 == 0)
+          html_product = html_product + `<div class="clearfix visible-lg visible-md"></div>`;
+        else if(gap % 2 == 0)
+          html_product = html_product + `<div class="clearfix visible-sm visible-xs"></div>`;
+      }
+
+      i++;
+    }
+
+    html_product = html_product + `</div>`;
+
+    if(idx_page > 2)
+    {
+      var html_page = ` <li><a href="/sellphone/home/?page=${idx_page-2}">${idx_page-2}</a></li>
+                        <li><a href=/sellphone/home/?page=${idx_page-1}#">${idx_page-1}</a></li>
+                        <li class="active">${idx_page}</li>`;
+
+      if(num_page >= idx_page+1)
+      {
+        html_page = html_page + `<li><a href="/sellphone/home/?page=${idx_page+1}">${idx_page+1}</a></li>`;
+
+        if(num_page >= idx_page+2)
+          html_page = html_page + `<li><a href="/sellphone/home/?page=${idx_page+2}">${idx_page+2}</a></li>`;
+      }
+    }
+    else
+    {
+      if(idx_page == 1)
+      {
+        var html_page = ` <li class="active">1</li>`;
+        console.log(html_page);
+
+        if(num_page >= idx_page+1)
+        {
+          html_page = html_page + `<li><a href="/sellphone/home/?page=${idx_page+1}">${idx_page+1}</a></li>`;
+
+          if(num_page >= idx_page+2)
+            html_page = html_page + `<li><a href="/sellphone/home/?page=${idx_page+2}">${idx_page+2}</a></li>`;
+
+          if(num_page >= idx_page+3)
+            html_page = html_page + `<li><a href="/sellphone/home/?page=${idx_page+3}">${idx_page+3}</a></li>`;
+
+          if(num_page >= idx_page+4)
+            html_page = html_page + `<li><a href="/sellphone/home/?page=${idx_page+4}">${idx_page+4}</a></li>`;
+        }
+      }
+      else
+      {
+        var html_page = ` 
+                        <li><a href="/sellphone/home/?page=1">1</a></li>
+                        <li class="active">2</li>`;
+                        
+        if(num_page >= idx_page+1)
+        {
+          html_page = html_page + `<li><a href="/sellphone/home/?page=${idx_page+1}">${idx_page+1}</a></li>`;
+
+          if(num_page >= idx_page+2)
+            html_page = html_page + `<li><a href="/sellphone/home/?page=${idx_page+2}">${idx_page+2}</a></li>`;
+
+          if(num_page >= idx_page+3)
+            html_page = html_page + `<li><a href="/sellphone/home/?page=${idx_page+3}">${idx_page+3}</a></li>`;
+        }
+      }
+    }
+
+    res.render('home', {product: html_product, page: html_page, idx: idx_page});
+    connection.release();
   });
 });
+});
 /* END : GET HOME URL */
-
 
 /* --------------- JYH --------------- */
 router.get('/login', function(req, res, next) {
