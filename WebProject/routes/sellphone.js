@@ -171,36 +171,6 @@ router.get('/login', function(req, res, next) {
   connection.release();
 });
 
-router.post('/login', function(req, res, next) {
-
-  var customer_id = req.body.customer_id;
-  var customer_pw = req.body.customer_pw;
-
-  var datas = [customer_id, customer_pw];
-
-  pool.getConnection(function(err, connection){
-      var sqlForInsertBoard = "select * FROM tutorial.joinform WHERE customer_id=? AND customer_pw=?";
-      connection.query(sqlForInsertBoard, datas, function(err, data){
-
-        console.log(data);
-        if(data == ""){ //아이디가 없는 경우
-          res.write("<script language=\"javascript\">alert('The ID does not exist or the password is incorrect!')</script>");
-          res.write("<script language=\"javascript\">window.location=\"login\"</script>");
-        }
-
-        else{ //아이디가 있는 경우
-           // 쿠키 설정
-          res.cookie("user", customer_id , { // user는 쿠키이름, 뒤에는 쿠키값
-            expires: new Date(Date.now() + 900000),
-            httpOnly: true
-          });
-          res.redirect('/sellphone/home');
-          connection.release();
-        }
-      });
-    });
-  });
-
 router.get('/joinform', function(req, res, next) {
   res.render('joinform');
   connection.release();
