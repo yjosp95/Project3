@@ -309,7 +309,114 @@ router.get('/mypage/update', function(req, res, next) {
     });
   });
 });
+router.get('/sell', function(req, res, next) {
+  pool.getConnection(function(err, connection){
 
+    var sqlForSelectList = "select * FROM tutorial.joinform WHERE customer_id=?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+      res.render('sell', {user: rows});
+      connection.release();
+    });
+  });
+});
+router.post('/sell', upload.fields([{ name: 'img1' }, { name: 'img2' }, { name: 'img3' }]), function(req, res, next) {
+  pool.getConnection(function(err, connection){
+
+    var sqlForSelectList = "select * FROM tutorial.joinform WHERE customer_id=?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      //console.log(req.files.img1);
+      if(err) console.log(err);
+      var product_saler = rows[0].customer_id;
+      var product_manufacturer = req.body.manufacturer;
+      var product_title = req.body.product_name;
+      var product_description = req.body.product_info;
+      var product_price = req.body.price;
+      var product_status = req.body.status;
+      var product_trade_facetoface = req.body.trade_facetoface;
+      var product_trade_point = req.body.trade_point;
+      var product_date = new Date().toISOString().substr(0, 10).replace('T', ' ');
+      var product_locate = rows[0].customer_address;
+      var product_state = "판매 중";
+      var product_color = req.body.product_color;
+      var product_storage = req.body.product_storage;
+      var img1;
+      var img2;
+      var img3;
+      if(req.files.img1 == null) img1=null;
+      else img1=req.files.img1[0].filename;
+      if(req.files.img2 == null) img2=null;
+      else img2=req.files.img2[0].filename;
+      if(req.files.img3 == null) img3=null;
+      else img3=req.files.img3[0].filename;
+      var datas = [product_saler, product_manufacturer, product_title, product_description, product_price, product_status, product_trade_facetoface, product_trade_point, product_date, product_locate,product_color,product_storage,img1,img2,img3, product_state];
+      var sqlForSelectList2 ="INSERT INTO tutorial.Product_list(product_saler, product_manufacturer, product_title, product_description ,product_price, product_status,product_trade_facetoface,product_trade_point,product_date,product_locate,product_color,product_storage,product_img1,product_img2,product_img3,product_state) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+      connection.query(sqlForSelectList2,datas,function(err,rowss){
+        console.log(req.files.img1[0].filename);
+        console.log(datas);
+        if(err) console.log(err);
+        console.log("rows : " + JSON.stringify(rowss));
+        
+        
+            if(product_title != null) res.redirect('home');
+            connection.release();
+        });
+      });
+    });
+  });
+});
+// 글조회
+router.get('/read/:product_id', function(req, res, next) {
+  var product_id = req.params.product_id;
+  pool.getConnection(function(err, connection){
+
+    var sqlForSelectList = "select * FROM tutorial.joinform WHERE customer_id=?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+      var sqlForSelectList2 = "select * from tutorial.product_list where product_id=?";
+      connection.query(sqlForSelectList2,product_id,function(err, rowss){
+       // console.log("#######"+(rowss[0].product_hit + 1));
+        if(err) console.error(err);
+        var sqlForSelectList3 = "update tutorial.product_list set product_hit = ? where product_id=?";
+        connection.query(sqlForSelectList3,[rowss[0].product_hit + 1,product_id],function(err,rowsss){
+        //  console.log("@@@@@@@@@"+rowss[0].product_hit + 1);
+          if(err) console.error(err);
+          var sqlForSelectList4 = "select * from tutorial.question_list where question_product=?";
+          connection.query(sqlForSelectList4,product_id,function(err,rowssss){
+            if(err) console.error(err);
+            var sqlForSelectList5 = "select * from tutorial.answer_list";
+            connection.query(sqlForSelectList5,product_id,function(err,rowsssss){
+              if(err) console.error(err);
+            //  console.log(rowsssss);
+              var sqlForSelectList6 = "select * from tutorial.interest_list where interest_customer=?";
+              connection.query(sqlForSelectList6,req.cookies.user,function(err,rowssssss){
+                if(err) console.error(err);
+             //   console.log(rowssssss);
+                var sqlForSelectList7 = "select * from tutorial.review_list where review_saler=?";
+                connection.query(sqlForSelectList7,rowss[0].product_saler,function(err,rowsssssss){
+                  if(err) console.error(err);
+                  //console.log(rowsssssss[0].review_creator);
+                  var sqlForSelectList8 = "select * from tutorial.joinform where customer_id=?";
+                  connection.query(sqlForSelectList8,rowss[0].product_saler,function(err,rowssssssss){
+                    if(err) console.error(err);
+                    console.log(rowssssssss[0]);
+                    var sqlForSelectList9 = "select * from tutorial.deal_list where deal_product=?";
+                    connection.query(sqlForSelectList9,rowss[0].product_id,function(err,rowsssssssss){
+                      if(err) console.error(err);
+                      console.log(rowsssssssss[0]);
+                      res.render('read', {user: rows, row: rowss[0], question: rowssss, answer: rowsssss, interest:rowssssss, review:rowsssssss,saler:rowssssssss,deal:rowsssssssss});
+                      connection.release();
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+});
 
 
 

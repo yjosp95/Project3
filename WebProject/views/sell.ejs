@@ -1,0 +1,532 @@
+<!--Write-->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<title>Electro - HTML Ecommerce Template</title>
+
+ 		<!-- Google font -->
+ 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+ 		<!-- Bootstrap -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/bootstrap.min.css"/>
+
+ 		<!-- Slick -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/slick.css"/>
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/slick-theme.css"/>
+
+ 		<!-- nouislider -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/nouislider.min.css"/>
+
+ 		<!-- Font Awesome Icon -->
+ 		<link rel="stylesheet" href="/electro/css/font-awesome.min.css">
+
+ 		<!-- Custom stlylesheet -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/style.css"/>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    </head>
+	<body>
+		<!-- HEADER -->
+		<header>
+						<!-- TOP HEADER -->
+                        <div id="top-header">
+                            <div class="container">
+                                <ul class="header-links pull-left">
+                                    <li><div style="color:white">셀폰 - 중고 휴대폰 개인 거래</div></li>
+                                </ul>
+                                <ul class="header-links pull-right">
+									<% if( user == null) { %>
+										<li><a href="/sellphone/login">로그인</a></li>
+									<% } else { %>
+										<form action="/sellphone/logout" method="post">
+											<li><button style="border:0; outline:0; background-color: #1E1F29;color:white;" type = "submit">로그아웃</button></li>
+											<!-- <input type="">로그아웃 -->
+										</form>
+									<% } %>
+									<li><a href="#">고객센터</a></li>
+								</ul>
+                            </div>
+                        </div>
+                        <!-- /TOP HEADER -->
+
+			<!-- MAIN HEADER -->
+			<div id="header">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<!-- LOGO -->
+						<div class="col-md-3">
+							<div class="header-logo">
+								<a href="/sellphone/home" class="logo">
+									<img src="/electro/img/my_logo.png" alt="">
+								</a>
+							</div>
+						</div>
+						<!-- /LOGO -->
+
+						<!-- SEARCH BAR -->
+						<div class="col-md-6">
+							<div class="header-search">
+								<form>
+									<select class="input-select">
+										<option value="0">Sell Phone</option>
+										<option value="1">Category 01</option>
+										<option value="1">Category 02</option>
+									</select>
+									<input class="input" placeholder="HnB">
+									<button class="search-btn">Search</button>
+								</form>
+							</div>
+						</div>
+						<!-- /SEARCH BAR -->
+
+						<!-- ACCOUNT -->
+						<div class="col-md-3 clearfix">
+							<div class="header-ctn">
+								<!-- Wishlist -->
+								<div>
+									<% if( user == null) { %>
+										<a href="/sellphone/login">
+											<i class="fa fa-pencil-square-o"></i>
+											<span>상품 등록</span>
+											<div class="qty">2</div>
+										</a>
+									<% } else { %>
+										<a href="/sellphone/sell">
+											<i class="fa fa-pencil-square-o"></i>
+											<span>상품 등록</span>
+											<div class="qty">2</div>
+										</a>
+									<% } %>
+								</div>
+								<!-- /Wishlist -->
+
+
+
+								<!-- MYPAGE -->
+								<div>
+									<% if( user == null) { %>
+										<a href="/sellphone/login" class="dropdown-toggle" aria-expanded="true">  <!-- data-toggle="dropdown"-->
+											<i class="fa fa-user-o"></i>
+											<span>마이페이지</span>
+											<div class="qty"></div>
+										</a>
+									<% } else { %>
+										<a href="/sellphone/mypage" class="dropdown-toggle" aria-expanded="true">  <!-- data-toggle="dropdown"-->
+											<i class="fa fa-user-o"></i>
+											<span>마이페이지</span>
+											<div class="qty"><%=user[0].customer_name%></div>
+										</a>
+									<% } %>
+								</div>
+								<!-- /MYPAGE -->
+
+								<!-- Menu Toogle -->
+								<div class="menu-toggle">
+									<a href="#">
+										<i class="fa fa-bars"></i>
+										<span>Menu</span>
+									</a>
+								</div>
+								<!-- /Menu Toogle -->
+							</div>
+						</div>
+						<!-- /ACCOUNT -->
+					</div>
+					<!-- row -->
+				</div>
+				<!-- container -->
+			</div>
+			<!-- /MAIN HEADER -->
+		</header>
+		<!-- /HEADER -->
+
+		<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<!-- /NAV -->
+				</div>
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
+
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="breadcrumb-header">상품등록</h3>
+						<ul class="breadcrumb-tree">
+							<li><a href="/sellphone/home">Home</a></li>
+							<li class="active">상품등록</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<form action="/sellphone/sell" method="post" enctype="multipart/form-data">
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<div class="col-md-7">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							<div class="section-title">
+								<h3 class="title">상품 정보</h3>
+							</div>
+								<div class="form-group">
+									<dt>상품명</dt>
+									<dd><input class="input" type="text" name="product_name" placeholder=" product name" required></dd>
+								</div>
+								<div class="form-group">
+									<dt>상품설명</dt>
+									<dd><textarea class="input_info" type="text" name="product_info" placeholder=" product info" required></textarea></dd>
+								</div>
+								<div class="form-group">
+									<dt>제조회사</dt>
+									<dd>
+										<select class="input-select" name="manufacturer" required>
+											<option value="">select manufacturer</option>
+											<option value="Samsumg">Samsumg</option>
+											<option value="Apple">Apple</option>
+											<option value="LG">LG</option>
+											<option value="기타">기타</option>
+										</select>
+									</dd>
+								</div>
+								<div class="form-group">
+									<dt>상품상태</dt>
+									<dd>
+										<select class="input-select" name="status" required>
+											<option value="">product status</option>
+											<option value="새 제품">새 제품</option>
+											<option value="S급">S급</option>
+											<option value="A급">A급</option>
+											<option value="B급">B급</option>
+										</select>
+									</dd>
+								</div>
+								<div class="form-group">
+									<dt>색상</dt>
+									<dd><input class="input" type="text" name="product_color" placeholder=" product color" required></dd>
+								</div>
+								<div class="form-group">
+									<dt>SSD</dt>
+									<dd>
+										<select class="input-select" name="product_storage" required>
+											<option value="">product SSD</option>
+											<option value="32G">32G</option>
+											<option value="64G">64G</option>
+											<option value="128G">128G</option>
+											<option value="256G">256G</option>
+											<option value="512G">512G</option>
+										</select>
+									</dd>
+								</div>
+								<div class="form-group">
+									<dt>거래방법</dt>
+									<dd>
+										<div required>
+											<input type="checkbox" name="trade_facetoface" value="직거래" checked>&nbsp직거래&nbsp&nbsp&nbsp&nbsp&nbsp
+											<input type="checkbox" name="trade_point" value="포인트거래">&nbspPoint
+										</div>
+									</dd>
+								</div>
+								<div class="form-group">
+									<dt>판매가격</dt>
+									<dd><input class="input" type="text" name="price" placeholder=" Price" required></dd>
+								</div>
+								<div class="form-group">
+									<dt >사진첨부</dt>
+									<div class="filebox">
+										<label for="img1">업로드</label>
+										<input type="file" name="img1" id="img1">
+										<div id='preview1' width="200px" height="200px">
+											<!-- 미리보기 공간 -->
+										</div>
+										<label for="img2">업로드</label>
+										<input type="file" name="img2" id="img2">
+										<div id='preview2' width="200px" height="200">
+											<!-- 미리보기 공간 -->
+										</div>
+										<label for="img3">업로드</label>
+										<input type="file" name="img3" id="img3" width="200" height="200">
+										<div id='preview3'>
+											<!-- 미리보기 공간 -->
+										</div>
+									</div>
+								</div>
+								<br>
+								<button class="cancelbutton" type="reset" onclick="goBack()">취소</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+								<button class="submitbutton" type="submit" onclick="onWriteSubmit()">등록완료</button>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		</form>
+		<!-- /SECTION -->
+
+		<!-- FOOTER -->
+		<footer id="footer">
+			<!-- top footer -->
+			<div class="section">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">About Us</h3>
+								<ul class="footer-links">
+									<li><a href="#"><i class="fa fa-map-marker"></i>Seoul, Korea</a></li>
+									<li><a href="#"><i class="fa fa-phone"></i>02-0000-0000</a></li>
+									<li><a href="#"><i class="fa fa-envelope-o"></i>HnB@gmail.com</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Categories</h3>
+								<ul class="footer-links">
+									<li><a href="#">Samsung</a></li>
+									<li><a href="#">Apple</a></li>
+									<li><a href="#">LG</a></li>
+									<li><a href="#">기타</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="clearfix visible-xs"></div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Service</h3>
+								<ul class="footer-links">
+									<li><a href="#">사이트 소개</a></li>
+									<li><a href="#">공지사항</a></li>
+									<li><a href="#">문의사항</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">My Menu</h3>
+								<ul class="footer-links">
+									<li><a href="#">마이페이지</a></li>
+									<li><a href="#">위시리스트</a></li>
+									<li><a href="#">구매내역</a></li>
+									<li><a href="#">판매내역</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /top footer -->
+
+			<!-- bottom footer -->
+			<div id="bottom-footer" class="section">
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<span class="copyright">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy HnB
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</span>
+						</div>
+					</div>
+						<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /bottom footer -->
+		</footer>
+		<!-- /FOOTER -->
+
+		<!-- jQuery Plugins -->
+		<script src="/electro/js/jquery.min.js"></script>
+		<script src="/electro/js/bootstrap.min.js"></script>
+		<script src="/electro/js/slick.min.js"></script>
+		<script src="/electro/js/nouislider.min.js"></script>
+		<script src="/electro/js/jquery.zoom.min.js"></script>
+		<script src="/electro/js/main.js"></script>
+		<script>
+			var upload1 = document.querySelector('#img1');
+			var preview1 = document.querySelector('#preview1');
+			var upload2 = document.querySelector('#img2');
+			var preview2 = document.querySelector('#preview2');
+			var upload3 = document.querySelector('#img3');
+			var preview3 = document.querySelector('#preview3');
+		 
+			upload1.addEventListener('change',function (e) {
+				var get_file = e.target.files;		 
+				var image = document.createElement('img');
+				image.style.height='350px';
+				image.style.weight='350px';			 
+				/* FileReader 객체 생성 */
+				var reader = new FileReader();		 
+				/* reader 시작시 함수 구현 */
+				reader.onload = (function (aImg) {
+					console.log(1);		 
+					return function (e) {
+						console.log(3);
+						/* base64 인코딩 된 스트링 데이터 */
+						aImg.src = e.target.result
+					}
+				})(image)		 
+				if(get_file){
+					/* 
+						get_file[0] 을 읽어서 read 행위가 종료되면 loadend 이벤트가 트리거 되고 
+						onload 에 설정했던 return 으로 넘어간다.
+						이와 함게 base64 인코딩 된 스트링 데이터가 result 속성에 담겨진다.
+					*/
+					reader.readAsDataURL(get_file[0]);
+					console.log(2);
+				}		 
+				preview1.appendChild(image);
+			})
+			upload2.addEventListener('change',function (e) {
+				var get_file = e.target.files;		 
+				var image = document.createElement('img');
+				image.style.height='350px';
+				image.style.weight='350px';		 
+				/* FileReader 객체 생성 */
+				var reader = new FileReader();		 
+				/* reader 시작시 함수 구현 */
+				reader.onload = (function (aImg) {
+					console.log(1);		 
+					return function (e) {
+						console.log(3);
+						/* base64 인코딩 된 스트링 데이터 */
+						aImg.src = e.target.result
+					}
+				})(image)		 
+				if(get_file){
+					/* 
+						get_file[0] 을 읽어서 read 행위가 종료되면 loadend 이벤트가 트리거 되고 
+						onload 에 설정했던 return 으로 넘어간다.
+						이와 함게 base64 인코딩 된 스트링 데이터가 result 속성에 담겨진다.
+					*/
+					reader.readAsDataURL(get_file[0]);
+					console.log(2);
+				}		 
+				preview2.appendChild(image);
+			})
+			upload3.addEventListener('change',function (e) {
+				var get_file = e.target.files;		 
+				var image = document.createElement('img');
+				image.style.height='350px';
+				image.style.weight='350px';		 
+				/* FileReader 객체 생성 */
+				var reader = new FileReader();		 
+				/* reader 시작시 함수 구현 */
+				reader.onload = (function (aImg) {
+					console.log(1);		 
+					return function (e) {
+						console.log(3);
+						/* base64 인코딩 된 스트링 데이터 */
+						aImg.src = e.target.result
+					}
+				})(image)		 
+				if(get_file){
+					/* 
+						get_file[0] 을 읽어서 read 행위가 종료되면 loadend 이벤트가 트리거 되고 
+						onload 에 설정했던 return 으로 넘어간다.
+						이와 함게 base64 인코딩 된 스트링 데이터가 result 속성에 담겨진다.
+					*/
+					reader.readAsDataURL(get_file[0]);
+					console.log(2);
+				}		 
+				preview3.appendChild(image);
+			})
+		</script>
+		<script>
+			function goBack() {			
+				window.history.back();			
+			}			
+		</script>
+		<script>
+            function onWriteSubmit(){
+                if ( $("#manufacturer").val().trim() == 0 ){
+                    var message = "제조사를 선택해 주세요";
+                    $("#manufacturer").val("");
+                    $("#manufacturer").focus();
+                    alert(message);
+                    return false;
+                }
+                if ( $("#product_name").val().trim() == "" ){
+                    var message = "제목을 입력해 주세요";
+                    $("#product_name").val("");
+                    $("#product_name").focus();
+                    alert("@@@@@@@");
+                    return false;
+                }
+                if ( $("#product_info").val().trim() == "" ){
+                    var message = "상품설명을 입력해 주세요";
+                    $("#product_info").val("");
+                    $("#product_info").focus();
+                    alert(message);
+                    return false;
+				}
+				if ( $("#price").val().trim() == "" ){
+                    var message = "판매가격을 입력해 주세요";
+                    $("#price").val("");
+                    $("#price").focus();
+                    alert(message);
+                    return false;
+				}
+				if ( $("#status").val().trim() == 0 ){
+                    var message = "상품상태를 선택해 주세요";
+                    $("#status").val("");
+                    $("#status").focus();
+                    alert(message);
+                    return false;
+				}
+				if ( $("#trade_facetoface").val().trim() == ""  && $("#trade_point").val().trim() == ""){
+                    var message = "거래방법을 선택해 주세요";
+                    $("#trade_facetoface").val("");
+                    $("#trade_facetoface").focus();
+                    alert(message);
+                    return false;
+				}
+            }
+        </script>
+	</body>
+</html>
