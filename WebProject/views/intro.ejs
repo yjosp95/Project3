@@ -1,0 +1,394 @@
+<!--Write-->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<title>Electro - HTML Ecommerce Template</title>
+
+ 		<!-- Google font -->
+ 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+ 		<!-- Bootstrap -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/bootstrap.min.css"/>
+
+ 		<!-- Slick -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/slick.css"/>
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/slick-theme.css"/>
+
+ 		<!-- nouislider -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/nouislider.min.css"/>
+
+ 		<!-- Font Awesome Icon -->
+ 		<link rel="stylesheet" href="/electro/css/font-awesome.min.css">
+
+ 		<!-- Custom stlylesheet -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/style.css"/>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    </head>
+	<body>
+		<!-- HEADER -->
+		<header>
+						<!-- TOP HEADER -->
+                        <div id="top-header">
+                            <div class="container">
+                                <ul class="header-links pull-left">
+                                    <li><div style="color:white">셀폰 - 중고 휴대폰 개인 거래</div></li>
+                                </ul>
+                                <ul class="header-links pull-right">
+									<% if( user == null) { %>
+										<li><a href="/sellphone/login">로그인</a></li>
+									<% } else { %>
+										<form action="/sellphone/logout" method="post">
+											<li><button style="border:0; outline:0; background-color: #1E1F29;color:white;" type = "submit">로그아웃</button></li>
+											<!-- <input type="">로그아웃 -->
+										</form>
+									<% } %>
+									<li><a href="#">고객센터</a></li>
+								</ul>
+                            </div>
+                        </div>
+                        <!-- /TOP HEADER -->
+
+			<!-- MAIN HEADER -->
+			<div id="header">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<!-- LOGO -->
+						<div class="col-md-3">
+							<div class="header-logo">
+								<a href="/sellphone/home" class="logo">
+									<img src="/electro/img/my_logo.png" alt="">
+								</a>
+							</div>
+						</div>
+						<!-- /LOGO -->
+
+						<!-- SEARCH BAR -->
+						<div class="col-md-6">
+							<div class="header-search">
+								<form>
+									<select class="input-select">
+										<option value="0">Sell Phone</option>
+										<option value="1">Category 01</option>
+										<option value="1">Category 02</option>
+									</select>
+									<input class="input" placeholder="HnB">
+									<button class="search-btn">Search</button>
+								</form>
+							</div>
+						</div>
+						<!-- /SEARCH BAR -->
+
+						<!-- ACCOUNT -->
+						<div class="col-md-3 clearfix">
+							<div class="header-ctn">
+								
+								<!-- MYPAGE -->
+								<div>
+									<% if( user == null) { %>
+										<a href="/sellphone/login" class="dropdown-toggle" aria-expanded="true">  <!-- data-toggle="dropdown"-->
+											<i class="fa fa-user-o"></i>
+											<span>마이페이지</span>
+											<div class="qty"></div>
+										</a>
+									<% } else { %>
+										<a href="/sellphone/mypage" class="dropdown-toggle" aria-expanded="true">  <!-- data-toggle="dropdown"-->
+											<i class="fa fa-user-o"></i>
+											<span>마이페이지</span>
+											<div class="qty"><%=user[0].customer_name%></div>
+										</a>
+									<% } %>
+								</div>
+								<!-- /MYPAGE -->
+
+								<!-- Menu Toogle -->
+								<div class="menu-toggle">
+									<a href="#">
+										<i class="fa fa-bars"></i>
+										<span>Menu</span>
+									</a>
+								</div>
+								<!-- /Menu Toogle -->
+							</div>
+						</div>
+						<!-- /ACCOUNT -->
+					</div>
+					<!-- row -->
+				</div>
+				<!-- container -->
+			</div>
+			<!-- /MAIN HEADER -->
+		</header>
+		<!-- /HEADER -->
+
+		<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<!-- /NAV -->
+				</div>
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<!-- section title -->
+					<div class="col-md-12">
+						<div class="section-title">
+							<h3 class="title">사이트 소개</h3>
+							<div class="section-nav">
+						</div>
+					</div>
+					<!-- /section title -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+            <!-- HOT DEAL SECTION -->
+		<div id="hot-deal" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="hot-deal">
+							<h2 class="text-uppercase" style="color: black; font-weight: bold;">#SellPhone</h2>
+                            <p style="font-weight: bold; font-size: medium;">#원하는 중고폰을 원하는 가격에 판매하자!</p>
+                            <p style="font-weight: bold; font-size: medium;">#원하는 중고폰을 원하는 가격에 구매하자!</p>
+                            <div class="row text-center"><img src="/electro/img/telecom.jpg" width ="500" height = "250" alt="telecomlogo"></div>
+                        </div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+        <!-- /HOT DEAL SECTION -->
+
+
+        	<!-- HOT DEAL SECTION -->
+		<div id="hot-deal" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="hot-deal">
+							<h2 class="text-uppercase"style="color: blue; font-weight: bold;">#안전</h2>
+                            <p style="font-weight: bold; font-size: medium; font-style: oblique;">#SellPhone은 중고폰 거래를 안전하고 믿을 수 있게 해주는 서비스입니다. <br></br>
+                                검색부터 거래까지 간단하고 빠르게 가능합니다. <br></br>휴대폰 가격이 비싸서 중고폰 구매를 고민하고 계시다면 #SellPhone을 찾아주세요!</p>
+                            <div class="row text-center"><img src="/electro/img/samsunglogo2.png" width ="400" height = "100" alt="samsunglogo"></div>
+                        </div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+        <!-- /HOT DEAL SECTION -->
+        
+        <!-- HOT DEAL SECTION -->
+		<div id="hot-deal" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="hot-deal">
+							<h2 class="text-uppercase"style="color: green; font-weight: bold; ">#다양</h2>
+                            <p style="font-weight: bold; font-size: medium; font-style: oblique;">#SellPhone에는 없는 폰이 없습니다! 최신폰부터 구형폰까지, 삼성에서 애플까지 모두 찾을 수 있습니다. <br></br>
+                                원하는 폰을 쉽게 찾을 수 있는 #SellPhone에서 중고폰 거래를 시작하세요!</p>
+                            <div class="row text-center"><img src="/electro/img/applelogo.png" width ="250" height = "200" alt="applelogo"></div>
+                        </div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+        <!-- /HOT DEAL SECTION -->
+
+
+        <!-- HOT DEAL SECTION -->
+		<div id="hot-deal" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="hot-deal">
+							<h2 class="text-uppercase"style="color: red; font-weight: bold;">#신뢰</h2>
+                            <p style="font-weight: bold; font-size: medium;font-style: oblique;">#SellPhone은 중고거래 구매자와 판매자 입장에서 생각하겠습니다. <br></br>
+                                사용자가 거래하기 쉽도록, 믿을 수 있도록 노력하겠습니다.</p>
+                            <div class="row text-center"><img src="/electro/img/lglogo.png" width ="200" height = "100" alt="lglogo"></div>
+                        </div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+        <!-- /HOT DEAL SECTION -->
+
+
+		<!-- HOT DEAL SECTION -->
+		<div id="hot-deal" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="hot-deal">
+							<ul class="hot-deal-countdown">
+								<li>
+									<div>
+										<h3>안전</h3>
+										<span>하고!</span>
+									</div>
+								</li>
+								<li>
+									<div>
+										<h3>다양</h3>
+										<span>하게!</span>
+									</div>
+								</li>
+								<li>
+									<div>
+										<h3>신뢰</h3>
+										<span>의 아이콘</span>
+									</div>
+								</li>
+								<li>
+									<div>
+										<h3>#Sell</h3>
+										<span style="font-weight: bold;">Phone</span>
+									</div>
+								</li>
+							</ul>
+							<h2 class="text-uppercase">지금도 새로운 중고폰이 올라오고 있습니다!</h2>
+							<p>지금 바로 구매하세요!</p>
+							<a class="primary-btn cta-btn" href="/sellphone/home">구매하기</a>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /HOT DEAL SECTION -->
+
+
+
+		
+
+		<!-- FOOTER -->
+		<footer id="footer">
+			<!-- top footer -->
+			<div class="section">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">About Us</h3>
+								<ul class="footer-links">
+									<li><a href="#"><i class="fa fa-map-marker"></i>Seoul, Korea</a></li>
+									<li><a href="#"><i class="fa fa-phone"></i>02-0000-0000</a></li>
+									<li><a href="#"><i class="fa fa-envelope-o"></i>HnB@gmail.com</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Categories</h3>
+								<ul class="footer-links">
+									<li><a href="#">Samsung</a></li>
+									<li><a href="#">Apple</a></li>
+									<li><a href="#">LG</a></li>
+									<li><a href="#">기타</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="clearfix visible-xs"></div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Service</h3>
+								<ul class="footer-links">
+									<li><a href="/sellphone/intro">사이트 소개</a></li>
+									<li><a href="#">공지사항</a></li>
+									<li><a href="/sellphone/ask_list">문의사항</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">My Menu</h3>
+								<ul class="footer-links">
+									<li><a href="#">마이페이지</a></li>
+									<li><a href="#">위시리스트</a></li>
+									<li><a href="#">구매내역</a></li>
+									<li><a href="#">판매내역</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /top footer -->
+
+			<!-- bottom footer -->
+			<div id="bottom-footer" class="section">
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<span class="copyright">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy HnB
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</span>
+						</div>
+					</div>
+						<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /bottom footer -->
+		</footer>
+		<!-- /FOOTER -->
+	</body>
+</html>
