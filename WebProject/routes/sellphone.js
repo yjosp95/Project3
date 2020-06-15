@@ -201,6 +201,13 @@ router.post('/login', function(req, res, next) {
     });
   });
 
+///////////////////////// logout
+router.post('/logout', function(req, res, next) {
+  res.clearCookie("user");
+  res.redirect('/home');
+});
+////////////////////////
+
 router.get('/joinform', function(req, res, next) {
   res.render('joinform');
   connection.release();
@@ -246,7 +253,76 @@ router.get('/OK', function(req, res, next) {
 });
 /* --------------- JYH --------------- */
 
+router.get('/mypage', function(req, res, next) {
+  pool.getConnection(function(err, connection){
+/* ---------- simple my information ---------- */
+    var sqlForSelectList = "select * FROM tutorial.joinform WHERE customer_id=?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+      //console.log(req.cookies.user+JSON.stringify(rows[0].customer_id));
 
+
+      /* ---------- my deal list ---------- */
+      sqlForSelectList = "select * FROM tutorial.deal_list WHERE deal_buyer=?";
+      connection.query(sqlForSelectList,req.cookies.user, function(err, rows2){
+        if(err) console.log(err);
+
+        if(rows2==""){
+          rows2=null;
+        }
+      /* ---------- my deal list ---------- */
+        else{
+          function slowfunc(callback,j){ //비동기 해결을 위한 함수
+            callback(j);
+          }
+          var rows3 = [];
+          sqlForSelectList = "select * FROM tutorial.product_list WHERE product_id=?";
+
+          for(var i=0 ; i < rows2.length ; i++){
+            var a=function(j){
+              connection.query(sqlForSelectList,rows2[j].deal_product, function(err, data){
+                if(data=="")
+                  console.log("상품 정보가 존재하지 않습니다.");
+                else
+                  rows3.push(data);
+
+                if(j==(rows2.length)-1){
+                  console.log(rows3);
+                  res.render('mypage', {user: rows, deal: rows2, buy: rows3});
+                  connection.release();
+                }
+              });
+            }
+            slowfunc(a,i);
+          }
+        }
+      });
+    });
+    /* ---------- simple my information ---------- */
+  });
+});
+
+/* --------------- JYH ing~ --------------- */
+
+
+
+
+
+
+
+
+router.get('/mypage/update', function(req, res, next) {
+  pool.getConnection(function(err, connection){
+
+    var sqlForSelectList = "select * FROM tutorial.joinform WHERE customer_id=?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+
+      res.render('mypage_update', {user: rows});
+      connection.release();
+    });
+  });
+});
 
 
 
