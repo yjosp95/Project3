@@ -418,7 +418,19 @@ router.get('/read/:product_id', function(req, res, next) {
   });
 });
 
+// 사이트 소개
+router.get('/intro', function(req, res, next) {
+  pool.getConnection(function(err, connection){
 
+    var sqlForSelectList = "select * FROM tutorial.joinform WHERE customer_id=?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+
+      res.render('intro', {user: rows});
+      connection.release();
+    });
+  });
+});
 
 
 
