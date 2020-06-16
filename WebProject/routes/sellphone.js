@@ -201,6 +201,35 @@ router.post('/login', function(req, res, next) {
     });
   });
 
+router.post('/login_n', function(req, res, next) {
+
+    var customer_id = req.body.customer_id;
+    var datas = [customer_id];
+
+    pool.getConnection(function(err, connection){
+        var sqlForInsertBoard = "select * FROM tutorial.joinform WHERE customer_id=?";
+        connection.query(sqlForInsertBoard, datas, function(err, data){
+
+          console.log(data);
+          if(data == ""){ //아이디가 없는 경우
+            res.write("<script language=\"javascript\">alert('The ID does not exist!')</script>");
+            res.write("<script language=\"javascript\">window.location=\"login_n\"</script>");
+          }
+
+          else{ //아이디가 있는 경우
+             // 쿠키 설정
+            res.cookie("user", customer_id , { // user는 쿠키이름, 뒤에는 쿠키값
+              expires: new Date(Date.now() + 900000),
+              httpOnly: true
+            });
+            //if(req.cookies) console.log("@@@@@@"+req.cookies);
+            res.redirect('/sellphone/home');
+            connection.release();
+          }
+        });
+      });
+    });
+
 ///////////////////////// logout
 router.post('/logout', function(req, res, next) {
   res.clearCookie("user");
