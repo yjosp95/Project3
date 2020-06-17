@@ -7,14 +7,14 @@ table.type02 {
     line-height: 1.5;
     border-top: 1px solid #ccc;
     border-left: 1px solid #ccc;
-		width: 80%;
-  	margin : auto;
+      width: 80%;
+     margin : auto;
 }
 table.type02 th {
     width: 150px;
     padding: 10px;
     font-weight: bold;
-		text-align: center;
+      text-align: center;
     vertical-align: top;
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
@@ -33,522 +33,833 @@ div#location {
   width:30%;
   margin : auto;
 }
+.My-btn1 {
+  display: inline-block;
+  padding: 6px 15px;
+  background-color: #D10024;
+  border: none;
+  border-radius: 40px;
+  color: #FFF;
+  font-weight: 700;
+  text-align: center;
+}
+
+.My-btn2 {
+  display: inline-block;
+  padding: 6px 15px;
+  background-color: #86E57F;
+  border: none;
+  border-radius: 40px;
+  color: #FFF;
+  font-weight: 700;
+  text-align: center;
+}
+
+.My-btn3 {
+  display: inline-block;
+  padding: 6px 15px;
+  background-color: #4C4C4C;
+  border: none;
+  border-radius: 40px;
+  color: #FFF;
+  font-weight: 700;
+  text-align: center;
+}
+
 </style>
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Electro - HTML Ecommerce Template</title>
+      <title>Electro - HTML Ecommerce Template</title>
 
- 		<!-- Google font -->
- 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+       <!-- Google font -->
+       <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
- 		<!-- Bootstrap -->
- 		<link type="text/css" rel="stylesheet" href="/electro/css/bootstrap.min.css"/>
+       <!-- Bootstrap -->
+       <link type="text/css" rel="stylesheet" href="/electro/css/bootstrap.min.css"/>
 
- 		<!-- Slick -->
- 		<link type="text/css" rel="stylesheet" href="/electro/css/slick.css"/>
- 		<link type="text/css" rel="stylesheet" href="/electro/css/slick-theme.css"/>
+       <!-- Slick -->
+       <link type="text/css" rel="stylesheet" href="/electro/css/slick.css"/>
+       <link type="text/css" rel="stylesheet" href="/electro/css/slick-theme.css"/>
 
- 		<!-- nouislider -->
- 		<link type="text/css" rel="stylesheet" href="/electro/css/nouislider.min.css"/>
+       <!-- nouislider -->
+       <link type="text/css" rel="stylesheet" href="/electro/css/nouislider.min.css"/>
 
- 		<!-- Font Awesome Icon -->
- 		<link rel="stylesheet" href="/electro/css/font-awesome.min.css">
+       <!-- Font Awesome Icon -->
+       <link rel="stylesheet" href="/electro/css/font-awesome.min.css">
 
- 		<!-- Custom stlylesheet -->
- 		<link type="text/css" rel="stylesheet" href="/electro/css/style.css"/>
+       <!-- Custom stlylesheet -->
+       <link type="text/css" rel="stylesheet" href="/electro/css/style.css"/>
 
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
 
 
     </head>
-	<body>
-		<!-- HEADER -->
-		<header>
-			<!-- TOP HEADER -->
-			<div id="top-header">
-				<div class="container">
-					<ul class="header-links pull-left">
-						<li><div style="color:white">셀폰 - 중고 휴대폰 개인 거래</div></li>
-					</ul>
-					<ul class="header-links pull-right">
-						<% if( user == null) { %>
-							<li><a href="/sellphone/login">로그인</a></li>
-						<% } else { %>
-							<form action="/sellphone/logout" method="post">
-								<li><button style="border:0; outline:0; background-color: #1E1F29;color:white;" type = "submit">로그아웃</button></li>
-								<!-- <input type="">로그아웃 -->
-							</form>
-						<% } %>
-						<li><a href="#">고객센터</a></li>
-					</ul>
-				</div>
-			</div>
-			<!-- /TOP HEADER -->
+   <body>
+      <!-- HEADER -->
+      <header>
+         <!-- TOP HEADER -->
+         <div id="top-header">
+            <div class="container">
+               <ul class="header-links pull-left">
+                  <li><div style="color:white">셀폰 - 중고 휴대폰 개인 거래</div></li>
+               </ul>
+               <ul class="header-links pull-right">
+                  <% if( user == null) { %>
+                     <li><a href="/sellphone/login">로그인</a></li>
+                  <% } else { %>
+                     <form action="/sellphone/logout" method="post">
+                        <li><button style="border:0; outline:0; background-color: #1E1F29;color:white;" type = "submit">로그아웃</button></li>
+                        <!-- <input type="">로그아웃 -->
+                     </form>
+                  <% } %>
+                  <li><a href="#">고객센터</a></li>
+               </ul>
+            </div>
+         </div>
+         <!-- /TOP HEADER -->
 
-			<!-- MAIN HEADER -->
-			<div id="header">
-				<!-- container -->
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<!-- LOGO -->
-						<div class="col-md-3">
-							<div class="header-logo">
-								<a href="/sellphone/home" class="logo">
-									<img src="/electro/img/my_logo.png" alt="">
+         <!-- MAIN HEADER -->
+         <div id="header">
+            <!-- container -->
+            <div class="container">
+               <!-- row -->
+               <div class="row">
+                  <!-- LOGO -->
+                  <div class="col-md-3">
+                     <div class="header-logo">
+                        <a href="/sellphone/home" class="logo">
+                           <img src="/electro/img/my_logo.png" alt="">
+                        </a>
+                     </div>
+                  </div>
+                  <!-- /LOGO -->
+
+                  <!-- SEARCH BAR -->
+                  <div class="col-md-6">
+                     <div class="header-search">
+                        <form>
+                           <select class="input-select">
+                              <option value="0">Sell Phone</option>
+                              <option value="1">Category 01</option>
+                              <option value="1">Category 02</option>
+                           </select>
+                           <input class="input" placeholder="HnB">
+                           <button class="search-btn">Search</button>
+                        </form>
+                     </div>
+                  </div>
+                  <!-- /SEARCH BAR -->
+
+                  <!-- ACCOUNT -->
+                  <div class="col-md-3 clearfix">
+                     <div class="header-ctn">
+                        <!-- Wishlist -->
+                        <div>
+							<% if( user == null) { %>
+								<a href="/sellphone/login">
+									<i class="fa fa-pencil-square-o"></i>
+									<span>상품 등록</span>
+									<div class="qty">1</div>
 								</a>
-							</div>
-						</div>
-						<!-- /LOGO -->
+							<% } else if(user!=null && user[0].customer_kind == 1) { %>
 
-						<!-- SEARCH BAR -->
-						<div class="col-md-6">
-							<div class="header-search">
-								<form>
-									<select class="input-select">
-										<option value="0">Sell Phone</option>
-										<option value="1">Category 01</option>
-										<option value="1">Category 02</option>
-									</select>
-									<input class="input" placeholder="HnB">
-									<button class="search-btn">Search</button>
-								</form>
-							</div>
-						</div>
-						<!-- /SEARCH BAR -->
-
-						<!-- ACCOUNT -->
-						<div class="col-md-3 clearfix">
-							<div class="header-ctn">
-								<!-- Wishlist -->
-								<div>
-									<!-- <a href="#">
-										<i class="fa fa-heart-o"></i>
-										<span>위시리스트</span>
+									<a href="/sellphone/member_manage">
+										<i class="fa fa-users"></i>
+										<span>회원관리</span>
 										<div class="qty">2</div>
-									</a> -->
-								</div>
-								<!-- /Wishlist -->
-
-
-
-								<!-- MYPAGE -->
-								<div>
-									<% if( user == null) { %>
-										<a href="/sellphone/login" class="dropdown-toggle" aria-expanded="true">  <!-- data-toggle="dropdown"-->
-											<i class="fa fa-user-o"></i>
-											<span>마이페이지</span>
-											<div class="qty"></div>
-										</a>
-									<% } else { %>
-										<a href="/sellphone/mypage" class="dropdown-toggle" aria-expanded="true">  <!-- data-toggle="dropdown"-->
-											<i class="fa fa-user-o"></i>
-											<span>마이페이지</span>
-											<div class="qty"><%=user[0].customer_name%></div>
-										</a>
-									<% } %>
-								</div>
-								<!-- /MYPAGE -->
-
-								<!-- Menu Toogle -->
-								<div class="menu-toggle">
-									<a href="#">
-										<i class="fa fa-bars"></i>
-										<span>Menu</span>
 									</a>
-								</div>
-								<!-- /Menu Toogle -->
-							</div>
+
+							<% } else { %>
+								<a href="/sellphone/sell">
+									<i class="fa fa-pencil-square-o"></i>
+									<span>상품 등록</span>
+									<div class="qty">2</div>
+								</a>
+							<% } %>
 						</div>
-						<!-- /ACCOUNT -->
-					</div>
-					<!-- row -->
-				</div>
-				<!-- container -->
-			</div>
-			<!-- /MAIN HEADER -->
-		</header>
-		<!-- /HEADER -->
+                        <!-- /Wishlist -->
 
-		<!-- NAVIGATION -->
-		<nav id="navigation">
 
-		</nav>
-		<!-- /NAVIGATION -->
 
-		<!-- BREADCRUMB -->
-		<div id="breadcrumb" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<h3 class="breadcrumb-header">마이페이지</h3>
-						<ul class="breadcrumb-tree">
-							<li><a href="/sellphone/home">Home</a></li>
-							<li class="active">마이페이지</li>
+                        <!-- MYPAGE -->
+                        <div>
+                           <% if( user == null) { %>
+                              <a href="/sellphone/login" class="dropdown-toggle" aria-expanded="true">  <!-- data-toggle="dropdown"-->
+                                 <i class="fa fa-user-o"></i>
+                                 <span>마이페이지</span>
+                                 <div class="qty"></div>
+                              </a>
+                           <% } else { %>
+                              <a href="/sellphone/mypage" class="dropdown-toggle" aria-expanded="true">  <!-- data-toggle="dropdown"-->
+                                 <i class="fa fa-user-o"></i>
+                                 <span>마이페이지</span>
+                                 <div class="qty"><%=user[0].customer_name%></div>
+                              </a>
+                           <% } %>
+                        </div>
+                        <!-- /MYPAGE -->
 
-						</ul>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /BREADCRUMB -->
+                        <!-- Menu Toogle -->
+                        <div class="menu-toggle">
+                           <a href="#">
+                              <i class="fa fa-bars"></i>
+                              <span>Menu</span>
+                           </a>
+                        </div>
+                        <!-- /Menu Toogle -->
+                     </div>
+                  </div>
+                  <!-- /ACCOUNT -->
+               </div>
+               <!-- row -->
+            </div>
+            <!-- container -->
+         </div>
+         <!-- /MAIN HEADER -->
+      </header>
+      <!-- /HEADER -->
 
-			<!-- SECTION -->
-			<div class="section">
-				<!-- container -->
-				<div class="container">
-					<!-- row -->
-					<div class="row">
+      <!-- NAVIGATION -->
+      <nav id="navigation">
 
-						<!-- Product tab -->
-						<div class="col-md-12">
-							<div id="product-tab">
-								<!-- product tab nav -->
-								<ul class="tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab1">내 정보</a></li>
-									<li><a data-toggle="tab" href="#tab2">위시리스트</a></li>
-									<li><a data-toggle="tab" href="#tab3">구매내역</a></li>
-									<li><a data-toggle="tab" href="#tab4">판매내역</a></li>
-								</ul>
-								<!-- /product tab nav -->
+      </nav>
+      <!-- /NAVIGATION -->
 
-								<!-- product tab content -->
-								<div class="tab-content">
-									<!-- tab1 내 정보 -->
-									<div id="tab1" class="tab-pane fade in active">
-											<!-- SECTION -->
+      <!-- BREADCRUMB -->
+      <div id="breadcrumb" class="section">
+         <!-- container -->
+         <div class="container">
+            <!-- row -->
+            <div class="row">
+               <div class="col-md-12">
+                  <h3 class="breadcrumb-header">마이페이지</h3>
+                  <ul class="breadcrumb-tree">
+                     <li><a href="/sellphone/home">Home</a></li>
+                     <li class="active">마이페이지</li>
 
-						<div class="billing-details" id="location">
-							<div class="section-title">
-								<h3 class="title">내 정보</h3>
-							</div>
-							<div class="form-group">
+                  </ul>
+               </div>
+            </div>
+            <!-- /row -->
+         </div>
+         <!-- /container -->
+      </div>
+      <!-- /BREADCRUMB -->
+
+         <!-- SECTION -->
+         <div class="section">
+            <!-- container -->
+            <div class="container">
+               <!-- row -->
+               <div class="row">
+
+                  <!-- Product tab -->
+                  <div class="col-md-12">
+                     <div id="product-tab">
+                        <!-- product tab nav -->
+                        <ul class="tab-nav">
+                           <li class="active"><a data-toggle="tab" href="#tab1">내 정보</a></li>
+                           <li><a data-toggle="tab" href="#tab2">찜목록</a></li>
+                           <li><a data-toggle="tab" href="#tab3">구매내역</a></li>
+                           <li><a data-toggle="tab" href="#tab4">판매내역</a></li>
+                           <li><a data-toggle="tab" href="#tab5">주문현황</a></li>
+                        </ul>
+                        <!-- /product tab nav -->
+
+                        <!-- product tab content -->
+                        <div class="tab-content">
+                           <!-- tab1 내 정보 -->
+                           <div id="tab1" class="tab-pane fade in active">
+                                 <!-- SECTION -->
+
+                  <div class="billing-details" id="location">
+                     <div class="section-title">
+                        <h3 class="title">내 정보</h3>
+                     </div>
+                     <div class="form-group">
                                 <div class="order-col">
                                     <div>아이디</div>
                                 <div class="input" type="text" name="customer_id"><%=user[0].customer_id%></div>
                                 <!-- <a href="#" class="primary-btn2 order-submit">수정</a> -->
                             </div>
-							</div>
+                     </div>
 
-							<div class="form-group">
+                     <div class="form-group">
                                 <div class="order-col">
                                     <div>이메일</div>
                                 <div class="input" type="text" name="customer_email"><%=user[0].customer_email%></div>
                                 <!-- <a href="#" class="primary-btn2 order-submit">수정</a> -->
                             </div>
-							</div>
-							<div class="form-group">
+                     </div>
+                     <div class="form-group">
                                 <div class="order-col">
                                     <div>이름</div>
                                 <div class="input" type="text" name="customer_name"><%=user[0].customer_name%></div>
                                 <!-- <a href="#" class="primary-btn2 order-submit">수정</a> -->
                             </div>
-							</div>
+                     </div>
 
-							<div class="form-group">
+                     <div class="form-group">
                                 <div class="order-col">
                                     <div>주소</div>
                                 <div class="input" type="text" name="customer_addresss"><%=user[0].customer_address%></div>
                                 <!-- <a href="#" class="primary-btn2 order-submit">수정</a> -->
                             </div>
-							</div>
+                     </div>
 
-							<div class="form-group">
+                     <div class="form-group">
                                 <div class="order-col">
                                     <div>휴대폰</div>
                                 <div class="input" type="text" name="customer_phone"><%=user[0].customer_phone%></div>
                                 <!-- <a href="#" class="primary-btn2 order-submit">수정</a> -->
                             </div>
-							</div>
+                     </div>
                             <div class="form-group">
                             <div>수신설정</div>
                             <br></br>
-							<div class="form-group">
-								<div class="input-checkbox">
-									<input type="checkbox" id="receive-email">
-									<label for="receive-email">
-										<span></span>
-										email
-									</label>
-									<div class="caption">
-										<p>추가로 수신을 원하는 이메일을 입력하세요</p>
-										<input class="input" type="email" name="email" placeholder="이메일 입력">
-									</div>
-								</div>
+                     <div class="form-group">
+                        <div class="input-checkbox">
+                           <input type="checkbox" id="receive-email">
+                           <label for="receive-email">
+                              <span></span>
+                              email
+                           </label>
+                           <div class="caption">
+                              <p>추가로 수신을 원하는 이메일을 입력하세요</p>
+                              <input class="input" type="email" name="email" placeholder="이메일 입력">
+                           </div>
+                        </div>
                             </div>
                             <div class="form-group">
-								<div class="input-checkbox">
-									<input type="checkbox" id="receive-SNS">
-									<label for="receive-SNS">
-										<span></span>
-										SNS
-									</label>
-								</div>
+                        <div class="input-checkbox">
+                           <input type="checkbox" id="receive-SNS">
+                           <label for="receive-SNS">
+                              <span></span>
+                              SNS
+                           </label>
+                        </div>
                             </div>
                             <div>회원정보, 거래정보 및 서비스 주요 정책 관련 내용은 수신동의 여부와 관계없이 발송됩니다.</div>
                             </div>
                             <a href="/sellphone/mypage/update" class="primary-btn3 order-submit">정보수정</a>
-						</div>
+                  </div>
 
-				<!-- /row -->
-			<!-- /container -->
-		<!-- /SECTION -->
-										<!-- <div class="row">
-											<div class="col-md-12">
-												<p>이 편지는 영국에서 최초로 시작되어 일년에 한 바퀴 돌면서 받는 사람에게 행운을 주었고 지금은 당신에게로 옮겨진 이 편지는 4일 안에 당신 곁을 떠나야 합니다. 이 편지를 포함해서 7통을 행운이 필요한 사람에게 보내 주셔야 합니다. 복사를 해도 좋습니다. 혹 미신이라 하실지 모르지만 사실입니다. 영국에서 HGXWCH이라는 사람은 1930년에 이 편지를 받았습니다. 그는 비서에게 복사해서 보내라고 했습니다. 며칠 뒤에 복권이 당첨되어 20억을 받았습니다. 어떤 이는 이 편지를 받았으나 96시간 이내 자신의 손에서 떠나야 한다는 사실을 잊었습니다. 그는 곧 사직되었습니다. 나중에야 이 사실을 알고 7통의 편지를 보냈는데 다시 좋은 직장을 얻었습니다. 미국의 케네디 대통령은 이 편지를 받았지만 그냥 버렸습니다. 결국 9일 후 그는 암살 당했습니다. 기억해 주세요. 이 편지를 보내면 7년의 행운이 있을 것이고 그렇지 않으면 3년의 불행이 있을 것입니다. 그리고 이 편지를 버리거나 낙서를 해서는 절대로 안됩니다. 7통입니다. 이 편지를 받은 사람은 행운이 깃들 것입니다. 힘들겠지만 좋은게 좋다고 생각하세요. 7년의 행운을 빌면서</p>
-											</div>
-										</div> -->
-									</div>
-									<!-- /tab1  -->
+            <!-- /row -->
+         <!-- /container -->
+      <!-- /SECTION -->
+                              <!-- <div class="row">
+                                 <div class="col-md-12">
+                                    <p>이 편지는 영국에서 최초로 시작되어 일년에 한 바퀴 돌면서 받는 사람에게 행운을 주었고 지금은 당신에게로 옮겨진 이 편지는 4일 안에 당신 곁을 떠나야 합니다. 이 편지를 포함해서 7통을 행운이 필요한 사람에게 보내 주셔야 합니다. 복사를 해도 좋습니다. 혹 미신이라 하실지 모르지만 사실입니다. 영국에서 HGXWCH이라는 사람은 1930년에 이 편지를 받았습니다. 그는 비서에게 복사해서 보내라고 했습니다. 며칠 뒤에 복권이 당첨되어 20억을 받았습니다. 어떤 이는 이 편지를 받았으나 96시간 이내 자신의 손에서 떠나야 한다는 사실을 잊었습니다. 그는 곧 사직되었습니다. 나중에야 이 사실을 알고 7통의 편지를 보냈는데 다시 좋은 직장을 얻었습니다. 미국의 케네디 대통령은 이 편지를 받았지만 그냥 버렸습니다. 결국 9일 후 그는 암살 당했습니다. 기억해 주세요. 이 편지를 보내면 7년의 행운이 있을 것이고 그렇지 않으면 3년의 불행이 있을 것입니다. 그리고 이 편지를 버리거나 낙서를 해서는 절대로 안됩니다. 7통입니다. 이 편지를 받은 사람은 행운이 깃들 것입니다. 힘들겠지만 좋은게 좋다고 생각하세요. 7년의 행운을 빌면서</p>
+                                 </div>
+                              </div> -->
+                           </div>
+                           <!-- /tab1  -->
 
-									<!-- tab2  위시리스트 -->
-									<div id="tab2" class="tab-pane fade in">
-										<div class="row">
-											<div class="col-md-12">
+                           <!-- tab2  위시리스트 -->
+                           <div id="tab2" class="tab-pane fade in">
+                              <div class="row">
+                                 <div class="col-md-12">
                         <% if( inter == null) { %>
                           <table class="type02">
-  													<thead>
-  														<tr>
-  															<th scope="cols">상품 이미지</th>
-  															<th scope="cols">상품 정보</th>
-  															<th scope="cols">상품 금액</th>
-  														</tr>
-  													</thead>
-  													<tr>
-  														<td style="text-align:center;" colspan="3" scope="row">찜한 내역이 없습니다!</td>
-  													</tr>
-  												</table>
+                                         <thead>
+                                            <tr>
+                                               <th scope="cols">상품 이미지</th>
+                                               <th scope="cols">상품 정보</th>
+                                               <th scope="cols">상품 금액</th>
+                                            </tr>
+                                         </thead>
+                                         <tr>
+                                            <td style="text-align:center;" colspan="3" scope="row">찜한 내역이 없습니다!</td>
+                                         </tr>
+                                      </table>
 
                         <% } else { %>
                           <table class="type02">
-  													<thead>
-  														<tr>
-  															<th scope="cols">상품 이미지</th>
-  															<th scope="cols">상품 정보</th>
-  															<th scope="cols">상품 금액</th>
-  														</tr>
-  													</thead>
+                                         <thead>
+                                            <tr>
+                                               <th scope="cols">상품 이미지</th>
+                                               <th scope="cols">상품 정보</th>
+                                               <th scope="cols">상품 금액</th>
+                                            </tr>
+                                         </thead>
                             <%for(var i = 0; i < inter.length; i++) {%>
-  														<tr>
-  															<td><img src="\<%= inter[i].interest_img1 %>" width="100" height="100"/></td> <!-- 정보 바꾸기 -->
-  															<td><%= inter[i].interest_title %><%= buy[i].deal_title %></td>
-  															<td><%= inter[i].interest_price %></td>
-  														</tr>
-  													<% } %>
-  												</table>
+                                            <tr>
+                                               <td><img src="/electro/img/<%= inter[i].interest_img1 %>" width="100" height="100"/></td> <!-- 정보 바꾸기 -->
+                                               <td>
+                                  <div><%= inter[i].interest_product %></div>
+                                  <div><%= inter[i].interest_title %></div>
+                                </td>
+                                               <td><%= inter[i].interest_price %></td>
+                                            </tr>
+                                         <% } %>
+                                      </table>
                         <% } %>
-											</div>
-										</div>
-									</div>
-									<!-- /tab2  -->
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- /tab2  -->
 
-									<!-- jyh -->
-									<!-- tab3  구매내역 -->
-									<div id="tab3" class="tab-pane fade in">
-										<div class="row">
-											<div class="col-md-12">
-												<% if( buy == null) { %>
-												<table class="type02">
-													<thead>
-														<tr>
-															<th scope="cols">구매 일자</th>
-															<th scope="cols">구매 상품 정보</th>
-															<th scope="cols">상품 금액</th>
-															<th scope="cols">판매자</th>
-														</tr>
-													</thead>
-													<tr>
-														<td style="text-align:center;" colspan="4" scope="row">구매 내역이 없습니다!</td>
-													</tr>
-												</table>
+                           <!-- jyh -->
+                           <!-- tab3  구매내역 -->
+                           <div id="tab3" class="tab-pane fade in">
+                              <div class="row">
+                                 <div class="col-md-12">
+                                    <% if( buy == null) { %>
+                                    <table class="type02">
+                                       <thead>
+                                          <tr>
+                                             <th scope="cols">구매 일자</th>
+                                             <th scope="cols">구매 상품 정보</th>
+                                             <th scope="cols">상품 금액</th>
+                                             <th scope="cols">판매자</th>
+                                          </tr>
+                                       </thead>
+                                       <tr>
+                                          <td style="text-align:center;" colspan="4" scope="row">구매 내역이 없습니다!</td>
+                                       </tr>
+                                    </table>
 
-												<% } else { %>
-													<table class="type02">
-														<thead>
-															<tr>
-																<th scope="cols">구매 일자</th>
-																<th scope="cols">구매 상품 정보</th>
-																<th scope="cols">상품 금액</th>
-																<th scope="cols">판매자</th>
-															</tr>
-														</thead>
-													<%for(var i = 0; i < buy.length; i++) {%>
-														<tr>
-															<td><%= buy[i].deal_date %></td> <!-- 정보 바꾸기 -->
-															<td><img src="\<%= buy[i].deal_img1 %>" width="100" height="100"/><%= buy[i].deal_title %></td>
-															<td><%= buy[i].deal_price %></td>
-															<td><%= buy[i].deal_seller %></td>
-														</tr>
-													<% } %>
-												</table>
-												<% } %>
-											</div>
-										</div>
-									</div>
-									<!-- /tab3  -->
-									<!-- jyh -->
+                                    <% } else { %>
+                                       <table class="type02">
+                                          <thead>
+                                             <tr>
+                                                <th scope="cols">구매 일자</th>
+                                                <th scope="cols">구매 상품 정보</th>
+                                                <th scope="cols">상품 금액</th>
+                                                <th scope="cols">판매자</th>
+                                             </tr>
+                                          </thead>
+                                       <%for(var i = 0; i < buy.length; i++) {%>
+                                          <tr>
+                                             <td><%= buy[i].deal_date %></td> <!-- 정보 바꾸기 -->
+                                             <td><img src="/electro/img/<%= buy[i].deal_img1 %>" width="100" height="100"/><%= buy[i].deal_title %></td>
+                                             <td><%= buy[i].deal_price %></td>
+                                             <td><%= buy[i].deal_seller %></td>
+                                          </tr>
+                                       <% } %>
+                                    </table>
+                                    <% } %>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- /tab3  -->
+                           <!-- jyh -->
 
-									<!-- tab4  -->
-									<div id="tab4" class="tab-pane fade in">
-										<div class="row">
-											<div class="col-md-12">
-												<% if( sell == null) { %>
-												<table class="type02">
-													<thead>
-														<tr>
-															<th scope="cols">구매 일자</th>
-															<th scope="cols">구매 상품 정보</th>
-															<th scope="cols">상품 금액</th>
-															<th scope="cols">구매자</th>
-														</tr>
-													</thead>
-													<tr>
-														<td style="text-align:center;" colspan="4" scope="row">판매 내역이 없습니다!</td>
-													</tr>
-												</table>
+                           <!-- tab4  -->
+                           <div id="tab4" class="tab-pane fade in">
+                              <div class="row">
+                                 <div class="col-md-12">
+                                    <% if( sell == null) { %>
+                                    <table class="type02">
+                                       <thead>
+                                          <tr>
+                                             <th scope="cols">구매 일자</th>
+                                             <th scope="cols">구매 상품 정보</th>
+                                             <th scope="cols">상품 금액</th>
+                                             <th scope="cols">구매자</th>
+                                          </tr>
+                                       </thead>
+                                       <tr>
+                                          <td style="text-align:center;" colspan="4" scope="row">판매 내역이 없습니다!</td>
+                                       </tr>
+                                    </table>
 
-												<% } else { %>
-													<table class="type02">
-														<thead>
-															<tr>
-																<th scope="cols">구매 일자</th>
-																<th scope="cols">구매 상품 정보</th>
-																<th scope="cols">상품 금액</th>
-																<th scope="cols">구매자</th>
-															</tr>
-														</thead>
-													<%for(var i = 0; i < deal.length; i++) {%>
-														<tr>
-															<td><%= sell[i].deal_date %></td> <!-- 정보 바꾸기 -->
-															<td><img src="\<%= sell[i].deal_img1 %>" width="100" height="100"/><%= sell[i].deal_title %></td>
-															<td><%= sell[i].deal_price %></td>
-															<td><%= sell[i].deal_buyer %></td>
-														</tr>
-													<% } %>
-												</table>
-												<% } %>
-											</div>
-										</div>
-									</div>
-									<!-- /tab4  -->
-								</div>
-								<!-- /product tab content  -->
-							</div>
-						</div>
-						<!-- /product tab -->
-					</div>
-					<!-- /row -->
-				</div>
-				<!-- /container -->
-			</div>
-			<!-- /SECTION -->
+                                    <% } else { %>
+                                      <div id="location" class="chart-container" style="position: relative; height:200px; width:60vw">
+                                        <canvas id="myChart"></canvas>
+                                      </div>
+                                      <!--<button type="button" id="reData">데이터 변경</button>
+                                      <button type="button" id="addData">데이터 추가</button>
+                                      <button type="button" id="addDataSet">데이터셋 추가</button>
+                                      <button type="button" id="delData">데이터 삭제</button>
+                                      <button type="button" id="delDataset">데이터셋 삭제</button>-->
+
+                                      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+                                                                          <script>
+                                                                        	var ctx = document.getElementById('myChart');
+
+                                                                        	var config = {
+                                                                        		type: 'bar',
+                                                                        		data: {
+                                                                        			labels: [],
+                                                                        			datasets: [{
+                                                                        				label: 'Price',
+                                                                        				backgroundColor: 'rgba(75, 192, 192, 1)',
+                                                                        				borderColor: 'rgba(75, 192, 192, 1)',
+                                                                        				fill: false,
+                                                                        				data: [],
+                                                                        			},
+                                                                              {
+                                                                                label: 'Total',
+                                                                                backgroundColor: 'rgba(255, 99, 132, 1)',
+                                                                        				borderColor: 'rgba(255, 99, 132, 1)',
+                                                                                fill: false,
+                                                                                data: [],
+                                                                              }]
+                                                                        		},
+                                                                        		options: {
+                                                                        			maintainAspectRatio: false,
+                                                                        			title: {
+                                                                        				text: 'Chart.js Time Scale'
+                                                                        			},
+                                                                        			scales: {
+                                                                        				yAxes: [{
+                                                                        					scaleLabel: {
+                                                                        						display: true,
+                                                                        						labelString: 'Price'
+                                                                        					},
+                                                                                  ticks: {
+                                                                                    min: 0,
+
+                                                                                    stepSize: 50000
+                                                                                  },
+                                                                        				}],
+                                                                        			},
+                                                                        		}
+                                                                        	};
+
+                                                                        	//차트 그리기
+                                                                        	var myChart = new Chart(ctx, config);
+
+                                                                        	//데이터 변경
+                                                                        	document.getElementById('reData').onclick = function(){
+
+                                                                        		//데이터셋 수 만큼 반복
+                                                                        		var dataset = config.data.datasets;
+                                                                        		for(var i=0; i<dataset.length; i++){
+                                                                        			console.log(dataset);
+                                                                        			//데이터 갯수 만큼 반복
+                                                                        			var data = dataset[i].data;
+                                                                        			for(var j=0 ; j < data.length ; j++){
+                                                                        				data[j] = Math.floor(Math.random() * 50);
+                                                                        			}
+                                                                        		}
+
+                                                                        		myChart.update();	//차트 업데이트
+                                                                        	}
+
+                                                                        	//데이터 추가
+                                                                        	document.getElementById('addData').onclick = function(){
+
+                                                                        		//라벨추가
+                                                                        		config.data.labels.push('data'+config.data.labels.length)
+
+                                                                        		//데이터셋 수 만큼 반복
+                                                                        		var dataset = config.data.datasets;
+                                                                        		for(var i=0; i<dataset.length; i++){
+                                                                        			//데이터셋의 데이터 추가
+                                                                        			dataset[i].data.push(Math.floor(Math.random() * 50));
+                                                                        		}
+                                                                        		myChart.update();	//차트 업데이트
+                                                                        	}
+
+                                                                        	//데이터셋 추가
+                                                                        	document.getElementById('addDataSet').onclick = function(){
+                                                                        		var color1 = Math.floor(Math.random() * 256);
+                                                                        		var color2 = Math.floor(Math.random() * 256);
+                                                                        		var color3 = Math.floor(Math.random() * 256);
+
+                                                                        		console.log(color1 + " " + color2 + " " + color3)
+
+                                                                        		var newDataset = {
+                                                                        			label: 'new Dataset'+config.data.datasets.length,
+                                                                        			borderColor : 'rgba('+color1+', '+color2+', '+color3+', 1)',
+                                                                        			backgroundColor : 'rgba('+color1+', '+color2+', '+color3+', 1)',
+                                                                        			data: [],
+                                                                        			fill: false
+                                                                        		}
+
+                                                                        		// newDataset에 데이터 삽입
+                                                                        		for (var i=0; i< config.data.labels.length; i++){
+                                                                        			var num = Math.floor(Math.random() * 50);
+                                                                        			newDataset.data.push(num);
+                                                                        		}
+
+                                                                        		// chart에 newDataset 푸쉬
+                                                                        		config.data.datasets.push(newDataset);
+
+                                                                        		myChart.update();	//차트 업데이트
+                                                                        	}
+
+                                                                        	//데이터 삭제
+                                                                        	document.getElementById('delData').onclick = function(){
+
+                                                                        		config.data.labels.splice(-1,1);//라벨 삭제
+
+                                                                        		//데이터 삭제
+                                                                        		config.data.datasets.forEach(function(dataset) {
+                                                                        			dataset.data.pop();
+                                                                        		});
+
+                                                                        		myChart.update();	//차트 업데이트
+                                                                        	}
+
+                                                                        	//데이터셋 삭제
+                                                                        	document.getElementById('delDataset').onclick = function(){
+                                                                        		config.data.datasets.splice(-1,1);
+                                                                        		myChart.update();	//차트 업데이트
+                                                                        	}
+
+                                                                          </script>
 
 
-		<!-- FOOTER -->
-		<footer id="footer">
-			<!-- top footer -->
-			<div class="section">
-				<!-- container -->
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">About Us</h3>
-								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-map-marker"></i>Seoul, Korea</a></li>
-									<li><a href="#"><i class="fa fa-phone"></i>02-0000-0000</a></li>
-									<li><a href="#"><i class="fa fa-envelope-o"></i>HnB@gmail.com</a></li>
-								</ul>
-							</div>
-						</div>
 
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Categories</h3>
-								<ul class="footer-links">
-									<li><a href="#">Samsung</a></li>
-									<li><a href="#">Apple</a></li>
-									<li><a href="#">LG</a></li>
-									<li><a href="#">기타</a></li>
-								</ul>
-							</div>
-						</div>
 
-						<div class="clearfix visible-xs"></div>
+                                                                          <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Service</h3>
-								<ul class="footer-links">
-									<li><a href="#">사이트 소개</a></li>
-									<li><a href="#">공지사항</a></li>
-									<li><a href="#">문의사항</a></li>
-								</ul>
-							</div>
-						</div>
+                                       <table class="type02">
+                                          <thead>
+                                             <tr>
+                                                <th scope="cols">구매 일자</th>
+                                                <th scope="cols">구매 상품 정보</th>
+                                                <th scope="cols">상품 금액</th>
+                                                <th scope="cols">구매자</th>
+                                             </tr>
+                                          </thead>
+                                       <%for(var i = 0; i < sell.length; i++) {%>
+                                          <tr>
+                                             <td><%= sell[i].deal_date %></td> <!-- 정보 바꾸기 -->
+                                             <td><img src="/electro/img/<%= sell[i].deal_img1 %>" width="100" height="100"/><%= sell[i].deal_title %></td>
+                                             <td><%= sell[i].deal_price %></td>
+                                             <td><%= sell[i].deal_buyer %></td>
+                                             <%if(i==0) {%>
+                                               <script>
+                                                    //라벨추가
+                                                    config.data.labels.push("<%= sell[i].deal_date %>")
+                                                    //데이터셋 수 만큼 반복
+                                                    var dataset = config.data.datasets;
+                                                    //데이터셋의 데이터 추가
+                                                    dataset[0].data.push(<%= sell[i].deal_price %>);
+                                                    dataset[1].data.push(<%= sell[i].deal_price %>);
+                                                    myChart.update();	//차트 업데이트
+                                               </script>
 
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">My Menu</h3>
-								<ul class="footer-links">
-									<li><a href="#">마이페이지</a></li>
-									<li><a href="#">위시리스트</a></li>
-									<li><a href="#">구매내역</a></li>
-									<li><a href="#">판매내역</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- /row -->
-				</div>
-				<!-- /container -->
-			</div>
-			<!-- /top footer -->
+                                             <%} else {%>
+                                               <script>
+                                                    //라벨추가
+                                                    var dataset = config.data.datasets;
+                                                    if("<%= sell[i].deal_date %>" == config.data.labels[config.data.labels.length-1]){
+                                                      dataset[0].data[dataset[0].data.length-1]=dataset[0].data[dataset[0].data.length-1]+<%= sell[i].deal_price %>;
+                                                      dataset[1].data[dataset[1].data.length-1]=dataset[1].data[dataset[1].data.length-1]+<%= sell[i].deal_price %>;
+                                                    }
 
-			<!-- bottom footer -->
-			<div id="bottom-footer" class="section">
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<span class="copyright">
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy HnB
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							</span>
-						</div>
-					</div>
-						<!-- /row -->
-				</div>
-				<!-- /container -->
-			</div>
-			<!-- /bottom footer -->
-		</footer>
-		<!-- /FOOTER -->
+                                                    else{
+                                                      config.data.labels.push("<%= sell[i].deal_date %>")
+                                                      dataset[0].data.push(<%= sell[i].deal_price %>);
+                                                      dataset[1].data.push(<%= sell[i].deal_price %> + dataset[1].data[dataset[1].data.length-1]);
+                                                      //dataset[1].data.push(dataset[1].data[dataset[1].data.length-1]=dataset[1].data[dataset[1].data.length-1]+<%= sell[i].deal_price %>);
+                                                    }
+                                                    myChart.update();	//차트 업데이트
 
-		<!-- jQuery Plugins -->
-		<script src="/electro/js/jquery.min.js"></script>
-		<script src="/electro/js/bootstrap.min.js"></script>
-		<script src="/electro/js/slick.min.js"></script>
-		<script src="/electro/js/nouislider.min.js"></script>
-		<script src="/electro/js/jquery.zoom.min.js"></script>
-		<script src="/electro/js/main.js"></script>
+                                                    //데이터셋 수 만큼 반복
+                                                  /*  var dataset = config.data.datasets;
+                                                    for(var i=0; i<dataset.length; i++){
+                                                      console.log(dataset);
+                                                      //데이터 갯수 만큼 반복
+                                                      var data = dataset[i].data;
+                                                      for(var j=0 ; j < data.length ; j++){
+                                                        data[j] = Math.floor(Math.random() * 50);
+                                                      }*/
 
-	</body>
+                                               </script>
+                                             <%}%>
+                                          </tr>
+                                       <% } %>
+                                    </table>
+                                    <% } %>
+                                 </div>
+                              </div>
+                           </div>
+
+
+
+
+
+
+
+
+
+                           <div id="tab5" class="tab-pane fade in">
+                              <div class="row">
+                                 <div class="col-md-12">
+                                    <% if( state == null) { %>
+                                    <table class="type02">
+                                       <thead>
+                                          <tr>
+                                            <th scope="cols">상품 정보</th>
+                                            <th scope="cols">상품 금액</th>
+                                            <th scope="cols">거래 상황</th>
+                                          </tr>
+                                       </thead>
+                                       <tr>
+                                          <td style="text-align:center;" colspan="3" scope="row">판매중인 상품이 없습니다!</td>
+                                       </tr>
+                                    </table>
+
+                                    <% } else { %>
+                                       <table class="type02">
+                                          <thead>
+                                             <tr>
+                                                <th scope="cols">상품 정보</th>
+                                                <th scope="cols">상품 금액</th>
+                                                <th scope="cols">거래 상황</th>
+                                             </tr>
+                                          </thead>
+                                       <%for(var i = 0; i < state.length; i++) {%>
+                                          <tr>
+                                             <td><img src="/electro/img/<%= state[i].product_img1 %>" width="100" height="100"/><%= state[i].product_title %></td>
+                                             <td><%= state[i].product_price %></td>
+                                             <%if(state[i].product_state=="판매 중") {%>
+                                             <td><b class="My-btn1"><%= state[i].product_state %></b></td>
+                                             <%}else if(state[i].product_state=="거래 중") {%>
+                                              <td><b class="My-btn2"><%= state[i].product_state %></b></td>
+                                              <% } else if(state[i].product_state=="거래 완료") {%>
+                                              <td><b class="My-btn3"><%= state[i].product_state %></b></td>
+                                              <% } %>
+                                             <!--<td><%= state[i].product_state %></td> <!-- 정보 바꾸기 -->
+                                          </tr>
+                                       <% } %>
+                                    </table>
+                                    <% } %>
+                                 </div>
+                              </div>
+                           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                           <!-- /tab4  -->
+                        </div>
+                        <!-- /product tab content  -->
+                     </div>
+                  </div>
+                  <!-- /product tab -->
+               </div>
+               <!-- /row -->
+            </div>
+            <!-- /container -->
+         </div>
+         <!-- /SECTION -->
+
+
+      <!-- FOOTER -->
+      <footer id="footer">
+         <!-- top footer -->
+         <div class="section">
+            <!-- container -->
+            <div class="container">
+               <!-- row -->
+               <div class="row">
+                  <div class="col-md-3 col-xs-6">
+                     <div class="footer">
+                        <h3 class="footer-title">About Us</h3>
+                        <ul class="footer-links">
+                           <li><a href="#"><i class="fa fa-map-marker"></i>Seoul, Korea</a></li>
+                           <li><a href="#"><i class="fa fa-phone"></i>02-0000-0000</a></li>
+                           <li><a href="#"><i class="fa fa-envelope-o"></i>HnB@gmail.com</a></li>
+                        </ul>
+                     </div>
+                  </div>
+
+                  <div class="col-md-3 col-xs-6">
+                     <div class="footer">
+                        <h3 class="footer-title">Categories</h3>
+                        <ul class="footer-links">
+                           <li><a href="#">Samsung</a></li>
+                           <li><a href="#">Apple</a></li>
+                           <li><a href="#">LG</a></li>
+                           <li><a href="#">기타</a></li>
+                        </ul>
+                     </div>
+                  </div>
+
+                  <div class="clearfix visible-xs"></div>
+
+                  <div class="col-md-3 col-xs-6">
+                     <div class="footer">
+                        <h3 class="footer-title">Service</h3>
+                        <ul class="footer-links">
+                           <li><a href="#">사이트 소개</a></li>
+                           <li><a href="#">공지사항</a></li>
+                           <li><a href="#">문의사항</a></li>
+                        </ul>
+                     </div>
+                  </div>
+
+                  <div class="col-md-3 col-xs-6">
+                     <div class="footer">
+                        <h3 class="footer-title">My Menu</h3>
+                        <ul class="footer-links">
+                           <li><a href="#">마이페이지</a></li>
+                           <li><a href="#">찜목록</a></li>
+                           <li><a href="#">구매내역</a></li>
+                           <li><a href="#">판매내역</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <!-- /row -->
+            </div>
+            <!-- /container -->
+         </div>
+         <!-- /top footer -->
+
+         <!-- bottom footer -->
+         <div id="bottom-footer" class="section">
+            <div class="container">
+               <!-- row -->
+               <div class="row">
+                  <div class="col-md-12 text-center">
+                     <span class="copyright">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy HnB
+                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                     </span>
+                  </div>
+               </div>
+                  <!-- /row -->
+            </div>
+            <!-- /container -->
+         </div>
+         <!-- /bottom footer -->
+      </footer>
+      <!-- /FOOTER -->
+
+      <!-- jQuery Plugins -->
+      <script src="/electro/js/jquery.min.js"></script>
+      <script src="/electro/js/bootstrap.min.js"></script>
+      <script src="/electro/js/slick.min.js"></script>
+      <script src="/electro/js/nouislider.min.js"></script>
+      <script src="/electro/js/jquery.zoom.min.js"></script>
+      <script src="/electro/js/main.js"></script>
+
+   </body>
 </html>
