@@ -1,0 +1,728 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+      <title>#SellPhone - 최상급 중고폰!</title>
+
+       <!-- Google font -->
+       <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+       <!-- Bootstrap -->
+       <link type="text/css" rel="stylesheet" href="/electro/css/bootstrap.min.css"/>
+
+       <!-- Slick -->
+       <link type="text/css" rel="stylesheet" href="/electro/css/slick.css"/>
+       <link type="text/css" rel="stylesheet" href="/electro/css/slick-theme.css"/>
+
+       <!-- nouislider -->
+       <link type="text/css" rel="stylesheet" href="/electro/css/nouislider.min.css"/>
+
+       <!-- Font Awesome Icon -->
+       <link rel="stylesheet" href="/electro/css/font-awesome.min.css">
+
+       <!-- Custom stlylesheet -->
+       <link type="text/css" rel="stylesheet" href="/electro/css/style.css"/>
+
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+
+
+        <meta http-equiv="Content-type" content="text/html; charset-euc-kr"/>
+        <title> table 태그에 대하여 </title>
+        <style type="text/css">
+          body{
+              font-family:"맑은 고딕";
+              font-size:1.5em;
+              color:#666;
+      }
+          a{
+              text-decoration:none;
+              color:#09f;
+      }
+          a:hover{
+      
+              text-decoration:underline;
+      }
+          caption{
+              display:none; /*안보이게 설정, 
+                                    화면에 보이지는 않지만 스크린리더리로 읽어짐.*/
+              
+          }
+          table{
+              width:1100px;
+              border-collapse:collapse;
+              border-top:2px solid #8d8d8d;
+      
+      }
+          th{
+              padding:10px 8px; /*padding: vertical horizontal;*/
+              background:#f9f9f9;
+              color:#666;
+              border-bottom:1px solid #8d8d8d;
+          }
+          
+          td{
+              padding:10px 8px; /*padding: vertical horizontal;*/
+              text-align:center;
+              line-height:1.25em;
+              color:#666;
+              border-bottom:1px solid #8d8d8d;
+          }
+      
+          td.article{ /*article 클래스가 적용된 열만 좌측 정렬*/
+              text-align:left;
+          }
+      
+          
+        </style>
+
+
+
+    </head>
+   <body>
+		<!-- HEADER -->
+		<header>
+						<!-- TOP HEADER -->
+                        <div id="top-header">
+                            <div class="container">
+                                <ul class="header-links pull-left">
+                                    <li><div style="color:white">셀폰 - 중고 휴대폰 개인 거래</div></li>
+                                </ul>
+								<ul class="header-links pull-right">
+									<% if( user == null) { %>
+										<li><a href="/sellphone/login">로그인</a></li>
+										<li><a href="/ask_list">문의사항</a></li>
+									<% } else { %>
+										<form action="/sellphone/logout" method="post">
+											<li><button style="border:0; outline:0; background-color: #1E1F29;color:white;" type = "submit">로그아웃</button></li>
+											<li><a href="/ask_list">문의사항</a></li>
+										</form>
+									<% } %>	
+						   </ul>
+                            </div>
+                        </div>
+                        <!-- /TOP HEADER -->
+
+			<!-- MAIN HEADER -->
+			<div id="header">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<!-- LOGO -->
+						<div class="col-md-3">
+							<div class="header-logo">
+								<a href="/sellphone/home" class="logo">
+									<img src="/electro/img/my_logo.png" alt="">
+								</a>
+							</div>
+						</div>
+						<!-- /LOGO -->
+
+						<!-- SEARCH BAR -->
+						<div class="col-md-6">
+							<div class="header-search">
+								<form action="/sellphone/search" method="post" onsubmit="return onWriteSubmit()">
+									<select name="category" class="input-select">
+										<option value="ALL">ALL</option>
+										<option value="Samsung">SAMSUNG</option>
+										<option value="Apple">APPLE</option>
+										<option value="LG">LG</option>
+										<option value="기타">ETC</option>
+									</select>
+									<input name="target" class="input" placeholder="HnB">
+									<button type="submit" class="search-btn">Search</button>
+								</form>
+							</div>
+						</div>
+						<!-- /SEARCH BAR -->
+
+						<!-- ACCOUNT -->
+						<div class="col-md-3 clearfix">
+							<div class="header-ctn">
+								<!-- Wishlist -->
+								<div>
+									<% if( user == null) { %>
+										<a href="/sellphone/login">
+											<i class="fa fa-pencil-square-o"></i>
+											<span>상품 등록</span>
+											<div class="qty">1</div>
+										</a>
+									<% } else if(user!=null && user[0].customer_kind == 1) { %>
+									
+											<a href="/sellphone/member_manage">
+												<i class="fa fa-users"></i>
+												<span>회원관리</span>
+												<div class="qty">2</div>
+											</a>
+										
+									<% } else { %>
+										<a href="/sellphone/sell">
+											<i class="fa fa-pencil-square-o"></i>
+											<span>상품 등록</span>
+											<div class="qty">2</div>
+										</a>
+									<% } %>
+								</div>
+								<!-- /Wishlist -->
+
+
+
+								<!-- MYPAGE -->
+								<div>
+								
+									<% if( user == null) { %>
+										<a href="/sellphone/login" class="dropdown-toggle" aria-expanded="true">  <!-- data-toggle="dropdown"-->
+											<i class="fa fa-user-o"></i>
+											<span>마이페이지</span>
+											<div class="qty"></div>
+										</a>
+									<% } else if(user[0].customer_kind == 1) { %>
+								
+										<a href="/sellphone/ask_list">
+											<i class="fa fa-question-circle-o"></i>
+											<span>문의사항</span>
+											<div class="qty">32</div>
+										</a>
+									<% } else { %>
+										<a href="/sellphone/mypage" class="dropdown-toggle" aria-expanded="true">  <!-- data-toggle="dropdown"-->
+											<i class="fa fa-user-o"></i>
+											<span>마이페이지</span>
+											<div class="qty"><%=user[0].customer_name%></div>
+										</a>
+									<% } %>
+								</div>
+								<!-- /MYPAGE -->
+
+								<!-- Menu Toogle -->
+								<div class="menu-toggle">
+									<a href="#">
+										<i class="fa fa-bars"></i>
+										<span>Menu</span>
+									</a>
+								</div>
+								<!-- /Menu Toogle -->
+							</div>
+						</div>
+						<!-- /ACCOUNT -->
+					</div>
+					<!-- row -->
+				</div>
+				<!-- container -->
+			</div>
+			<!-- /MAIN HEADER -->
+		</header>
+		<!-- /HEADER -->
+
+		<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<!-- /NAV -->
+				</div>
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<!-- section title -->
+					<div class="col-md-12">
+						<div class="section-title">
+							<h3 class="title">주문/결제하기</h3>
+							<div class="section-nav">
+						</div>
+					</div>
+					<!-- /section title -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+
+        <div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-7">
+                        
+						<!-- Billing Details -->
+						<div class="billing-details">
+                            <div class="section-title">
+								<h3 class="title">상품 정보</h3>
+							</div>
+							<div class="dataTbl1">
+								<table summary="공지사항 목록입니다.">
+							   
+										   <!--표의 제목-->
+										   <caption>공지사항</caption>
+							   
+										   <colgroup> 
+											  <!--col태그는 표에서 하나 이상의 td태그에 대해 속성값을 정의-->
+											  <!-- 여기서는 각 열의 크기를 지정-->
+											   <col width="10%"/>
+											   <col width="*"/>  <!--나머지 크기-->
+											   <col width="14%"/>
+										   </colgroup>
+							   
+										   <!--테이블 머리말 부분-->
+										   <thead>
+											   <th scope="상품명">상품명</th> 
+										   </thead>
+							   
+										   <!--테이블 내용 부분-->
+										   <tbody>
+											   <tr>
+												  	<td class="article"><div class="input" type="text" name="product_id"><%=product[0].product_title%></div></td>
+											   </tr>
+										   </tbody>
+
+										   <!--테이블 머리말 부분-->
+										   <thead>
+											<th scope="판매자">판매자</th> 
+										</thead>
+							
+										<!--테이블 내용 부분-->
+										<tbody>
+											<tr>
+												   <td class="article"><div class="input"><%=product[0].product_saler%></div></td>
+											</tr>
+										</tbody>										   
+
+										<!--테이블 머리말 부분-->
+										<thead>
+											<th scope="상품번호">상품번호</th> 
+										</thead>
+							
+										<!--테이블 내용 부분-->
+										<tbody>
+											<tr>
+												   <td class="article"><div class="input" type="text" name="product_number"><%=product[0].product_id%></div></td>
+											</tr>
+										</tbody>										   
+										
+										 <!--테이블 머리말 부분-->
+										 <thead>
+											<th scope="상품가격">상품가격</th> 
+										</thead>
+							
+										<!--테이블 내용 부분-->
+										<tbody>
+											<tr>
+												   <td class="article"><div class="input" type="text" name="product_number"><%=product[0].product_price%></div></td>
+											</tr>
+										</tbody>						
+
+								</table>
+									   <p></p>
+							   </div>
+
+
+                            <!-- <div class="form-group">
+                                <div class="order-row">
+                                    <div>상품명</div>
+                                <div class="input" type="text" name="product_id"><%=product[0].product_title%></div>
+                        	     <a href="#" class="primary-btn2 order-submit">수정</a>
+                            	</div>
+							</div>
+						
+                            <div class="form-group">
+                                <div class="qty-label">
+                                    판매자
+                                    <div class="input"><%=product[0].product_saler%>
+                                        <input type="number">
+                                        <span class="qty-up">+</span>
+                                        <span class="qty-down">-</span>
+                                    </div>
+                                </div>                            
+                            </div>
+
+                                
+
+                            <div class="form-group">
+                                <div class="order-col">
+                                    <div>상품번호</div>
+                                	<div class="input" type="text" name="product_number"><%=product[0].product_id%></div>
+                                <a href="#" class="primary-btn2 order-submit">수정</a>
+                            	</div>
+							</div>
+							<div class="form-group">
+                                <div class="order-col">
+                                    <div>상품가격</div>
+                                	<div class="input" type="text" name="product_number"><%=product[0].product_price%></div>
+                                <a href="#" class="primary-btn2 order-submit">수정</a>
+                            	</div>
+                            </div> -->
+
+                            <br></br>
+
+
+							<div class="section-title">
+								<h3 class="title">주문자 정보</h3>
+							</div>
+							<div class="dataTbl1">
+								<table summary="공지사항 목록입니다.">
+							   
+										   <!--표의 제목-->
+										   <caption>공지사항</caption>
+							   
+										   <colgroup> 
+											  <!--col태그는 표에서 하나 이상의 td태그에 대해 속성값을 정의-->
+											  <!-- 여기서는 각 열의 크기를 지정-->
+											   <col width="10%"/>
+											   <col width="*"/>  <!--나머지 크기-->
+											   <col width="14%"/>
+										   </colgroup>
+							   
+										   <!--테이블 머리말 부분-->
+										   <thead>
+											   <th scope="아이디">아이디</th> 
+										   </thead>
+							   
+										   <!--테이블 내용 부분-->
+										   <tbody>
+											   <tr>
+												  	<td class="article"><div class="input" type="text" name="customer_id"><%=user[0].customer_id%></div></td>
+											   </tr>
+										   </tbody>
+
+										   <!--테이블 머리말 부분-->
+										   <thead>
+											<th scope="이름">이름</th> 
+										</thead>
+							
+										<!--테이블 내용 부분-->
+										<tbody>
+											<tr>
+												   <td class="article"><div class="input" type="text" name="customer_id"><%=user[0].customer_name%></div></td>
+											</tr>
+										</tbody>										   
+
+										<!--테이블 머리말 부분-->
+										<thead>
+											<th scope="휴대폰">휴대폰</th> 
+										</thead>
+							
+										<!--테이블 내용 부분-->
+										<tbody>
+											<tr>
+												   <td class="article"><div class="input" type="text" name="customer_phone"><%=user[0].customer_phone%></div></td>
+											</tr>
+										</tbody>										   
+										
+										 <!--테이블 머리말 부분-->
+										 <thead>
+											<th scope="상품가격">주소</th> 
+										</thead>
+							
+										<!--테이블 내용 부분-->
+										<tbody>
+											<tr>
+												   <td class="article"><div class="input" type="text" name="customer_addresss"><%=user[0].customer_address%></div></td>
+											</tr>
+										</tbody>						
+
+										<!--테이블 머리말 부분-->
+										<thead>
+											<th scope="My Point">My Point</th> 
+										</thead>
+							
+										<!--테이블 내용 부분-->
+										<tbody>
+											<tr>
+												   <td class="article"><form action="/sellphone/charge/<%=user[0].customer_id%>" method="GET">
+													<div class="order-col">
+														<div>My Point</div>
+														<div class="input" type="text" name="customer_addresss"><%=user[0].customer_wallet%><button type="submit"  style='height: 40px;
+															width: 100px;
+															background: white;
+															color: red;
+															font-weight: 600;
+															border: none;
+															height: 38px;
+															float: right;'>충전하기</button></div>
+													<!-- <a href="#" class="primary-btn2 order-submit">수정</a> -->
+													</div>
+													</form></td>
+											</tr>
+										</tbody>					
+								</table>
+									   <p></p>
+							   </div>
+							<!-- <div class="section-title">
+								<h3 class="title">주문자 정보 입력</h3>
+							</div>
+							<div class="form-group">
+                                <div class="order-row">
+                                    <div>아이디</div>
+                                <div class="input" type="text" name="customer_id"><%=user[0].customer_id%></div>
+                                <a href="#" class="primary-btn2 order-submit">수정</a>
+                            </div>
+							</div>
+                            <div class="form-group">
+                                <div class="order-row">
+                                    <div>이름</div>
+                                <div class="input" type="text" name="customer_id"><%=user[0].customer_name%></div>
+                                <a href="#" class="primary-btn2 order-submit">수정</a>
+                            </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="order-col">
+                                    <div>휴대폰</div>
+                                <div class="input" type="text" name="customer_phone"><%=user[0].customer_phone%></div>
+                                <a href="#" class="primary-btn2 order-submit">수정</a>
+                            </div>
+							</div>
+							<div class="form-group">
+                                <div class="order-col">
+                                    <div>주소</div>
+                                	<div class="input" type="text" name="customer_addresss"><%=user[0].customer_address%></div>
+                                <a href="#" class="primary-btn2 order-submit">수정</a>
+                            	</div>
+							</div>
+							<div class="form-group">
+								<form action="/sellphone/charge/<%=user[0].customer_id%>" method="GET">
+                                <div class="order-col">
+                                    <div>My Point</div>
+									<div class="input" type="text" name="customer_addresss"><%=user[0].customer_wallet%><button type="submit"  style='height: 40px;
+										width: 100px;
+										background: white;
+										color: red;
+										font-weight: 600;
+										border: none;
+										height: 38px;
+										float: right;'>충전하기</button></div>
+                                <a href="#" class="primary-btn2 order-submit">수정</a>
+								</div>
+								</form>
+							</div>
+                            
+                            <br></br> -->
+
+                            <!-- <div class="section-title">
+								<h3 class="title">배송 정보</h3>
+							</div>
+                            <div class="form-group">
+                                <div class="order-row">
+                                    <div>이름</div>
+                                <div class="input" type="text" name="customer_id"></div>
+                            </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="order-col">
+                                    <div>휴대폰</div>
+                                <div class="input" type="text" name="customer_phone"></div>
+                            </div>
+                            </div>
+
+							<div class="form-group">
+                                <div class="order-col">
+                                    <div>주소</div>
+                                	<div class="input" type="text" name="customer_addresss"></div>
+                            	</div>
+							</div>
+                            
+                            <br></br> -->
+
+                            <div class="section-title">
+								<h3 class="title">결제 방법</h3>
+                            </div>
+                            
+                            <div class="form-group">
+							<% if(product[0].product_price <= user[0].customer_wallet) { %>
+								<form name="check" action="/sellphone/payment/<%=product[0].product_id%>" method="POST">
+							<% } else { %>
+								<form name="check" action="/sellphone/payment/<%=product[0].product_id%>" method="POST" onsubmit="return checkpoint(this)">
+							<% } if(product[0].product_trade_facetoface != null) { %>
+                            <div class="form-group">
+								<div class="input-checkbox">
+									<input type="checkbox" id="checkbox" name="facetoface">
+									<label for="checkbox">
+										<span></span>
+										직거래
+									</label>
+								</div>
+							</div>
+							<% } if(product[0].product_trade_point != null) { %>
+                            <div class="form-group">
+								<div class="input-checkbox">
+									<input type="checkbox" id="point" name="point" value="point">
+									<label for="point">
+										<span></span>
+										포인트거래
+									</label>
+								</div>
+							</div>
+							<% } %>
+                            <!-- <div class="form-group">
+								<div class="input-checkbox">
+									<input type="checkbox" id="receive-SNS3">
+									<label for="receive-SNS3">
+										<span></span>
+										간편결제
+									</label>
+								</div>
+                            </div> -->
+
+							
+							
+                            	<!-- <button class="cancelbutton" type="reset" onclick="goBack()">취소</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp -->
+								<button class="submitbutton" type="submit">거래하기</button>
+							</form>
+                            </div>
+						</div>
+
+					</div>
+
+
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+
+
+		
+
+	<!-- FOOTER -->
+	<footer id="footer">
+		<!-- top footer -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">About Us</h3>
+							<ul class="footer-links">
+								<li><a href="#"><i class="fa fa-map-marker"></i>Seoul, Korea</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i>02-0000-0000</a></li>
+								<li><a href="#"><i class="fa fa-envelope-o"></i>HnB@gmail.com</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">Categories</h3>
+							<ul class="footer-links">
+								<li><a href="#">Samsung</a></li>
+								<li><a href="#">Apple</a></li>
+								<li><a href="#">LG</a></li>
+								<li><a href="#">기타</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="clearfix visible-xs"></div>
+
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">Service</h3>
+							<ul class="footer-links">
+								<li><a href="/intro">사이트 소개</a></li>
+								<li><a href="/announcement">공지사항</a></li>
+								<li><a href="/ask_list">문의사항</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">My Menu</h3>
+							<ul class="footer-links">
+								<li><a href="/mypage">마이페이지</a></li>
+								<li><a href="/sell">상품등록</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /top footer -->
+
+		<!-- bottom footer -->
+		<div id="bottom-footer" class="section">
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<span class="copyright">
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							Copyright &copy HnB
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</span>
+					</div>
+				</div>
+					<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /bottom footer -->
+	</footer>
+	<!-- /FOOTER -->
+
+		<!-- jQuery Plugins -->
+		<script src="/electro/js/jquery.min.js"></script>
+		<script src="/electro/js/bootstrap.min.js"></script>
+		<script src="/electro/js/slick.min.js"></script>
+		<script src="/electro/js/nouislider.min.js"></script>
+		<script src="/electro/js/jquery.zoom.min.js"></script>
+		<script src="/electro/js/main.js"></script>
+		<script>
+			function wishlist() {			
+				alert("찜목록에 추가되었습니다!");		
+			}			
+		</script>
+		<script>
+			function deletewishlist() {			
+				alert("찜목록에서 삭제되었습니다!");		
+			}			
+		</script>
+		<script>
+			function reviewbtn(){
+				alert("로그인을 먼저 해주세요!");	
+			}
+		</script>
+		<script>
+			function nobuy(){
+				alert("이미 구매 중인 단계의 상품입니다!");	
+			}
+		</script>
+		<script>
+			function checkpoint(check){
+				var point=document.check.point.checked;
+				if(point){
+					alert("point를 충전해 부족합니다.");
+					return false;	
+				}
+			}
+		</script>
+	</body>
+</html>
