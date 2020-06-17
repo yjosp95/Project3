@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<style>
+div#location {
+  width:30%;
+  margin : auto;
+}
+</style>
+
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
@@ -97,11 +104,11 @@
 							<div class="header-ctn">
 								<!-- Wishlist -->
 								<div>
-									<!-- <a href="#">
+									<a href="/sellphone/sell">
 										<i class="fa fa-heart-o"></i>
-										<span>위시리스트</span>
+										<span>상품 등록</span>
 										<div class="qty">2</div>
-									</a> -->
+									</a>
 								</div>
 								<!-- /Wishlist -->
 
@@ -124,7 +131,7 @@
 									<% } %>
 								</div>
 								<!-- /MYPAGE -->
-						
+
 								<!-- Menu Toogle -->
 								<div class="menu-toggle">
 									<a href="#">
@@ -143,19 +150,12 @@
 			</div>
 			<!-- /MAIN HEADER -->
 		</header>
-		<!-- /HEADER -->
 
-		<!-- NAVIGATION -->
 		<nav id="navigation">
-
 		</nav>
-		<!-- /NAVIGATION -->
 
-		<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
-			<!-- container -->
 			<div class="container">
-				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
 						<h3 class="breadcrumb-header">정보수정</h3>
@@ -173,43 +173,39 @@
 		<!-- /BREADCRUMB -->
 
 			<!-- SECTION -->
-		<div class="section">
 			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-7">
-                        
-						<!-- Billing Details -->
-						<div class="billing-details">
+			<form action="/sellphone/mypage/update" method="post">
+						<div class="billing-details" id="location">
 							<div class="section-title">
 								<h3 class="title">내 정보</h3>
 							</div>
+
+							<div class="form-group">
+																<div class="order-col">
+																		<div>아이디</div>
+																<div class="input" type="text" name="customer_id" required><%=user[0].customer_id%></div>
+														</div>
+							</div>
+
 							<div class="form-group">
                                 <div class="order-col">
-                                    <div>아이디</div>
-                                <div class="input" type="text" name="customer_id"></div>
+                                    <div>비밀번호</div>
+                                <input class="input" type="password" name="customer_pw" value="<%=user[0].customer_pw%>" required></input>
                                 <!-- <a href="#" class="primary-btn2 order-submit">수정</a> -->
                             </div>
 							</div>
-							<div class="form-group">
-                                <div class="order-col">
-                                    <div>소개글</div>
-                                    <textarea class="input" type="text" name="intro"></textarea>
-                                <!-- <a href="#" class="primary-btn2 order-submit">수정</a> -->
-                            </div>
-							</div>
+
 							<div class="form-group">
                                 <div class="order-col">
                                     <div>이메일</div>
-                                <div class="input" type="text" name="customer_email"></div>
+                                <input class="input" type="text" name="customer_email" value="<%=user[0].customer_email%>" required></input>
                                 <!-- <a href="#" class="primary-btn2 order-submit">수정</a> -->
                             </div>
 							</div>
 							<div class="form-group">
                                 <div class="order-col">
                                     <div>이름</div>
-                                <div class="input" type="text" name="customer_name"></div>
+                                <input class="input" type="text" name="customer_name" value="<%=user[0].customer_name%>" required></input>
                                 <!-- <a href="#" class="primary-btn2 order-submit">수정</a> -->
                             </div>
 							</div>
@@ -217,39 +213,25 @@
 							<div class="form-group">
                                 <div class="order-col">
                                     <div>주소</div>
-                                <div class="input" type="text" name="customer_addresss"></div>
+                                <input class="input" type="text" name="customer_address" value="<%=user[0].customer_address%>" required></input>
                                 <!-- <a href="#" class="primary-btn2 order-submit">수정</a> -->
                             </div>
 							</div>
-							
+
 							<div class="form-group">
                                 <div class="order-col">
                                     <div>휴대폰</div>
-                                <div class="input" type="text" name="customer_phone"></div>
+                                <input class="input" type="text" name="customer_phone" value="<%=user[0].customer_phone%>" required></input>
                                 <!-- <a href="#" class="primary-btn2 order-submit">수정</a> -->
                             </div>
 							</div>
-							<!-- <div class="form-group">
-                                <div class="order-col">
-                                    <div>비밀번호</div>
-                                <div class="input" type="text" name="password"></div>
-                            </div>
-							</div> -->
                             <div class="form-group">
-								<a href="/sellphone/mypage/update" class="primary-btn3 order-submit">수정완료</a>
+															<button type="submit" class="primary-btn3 order-submit">수정완료</button>
+															<a href="/sellphone/mypage" class="primary-btn3 order-submit">돌아가기</a>
                             </div>
-						</div>
 
-					</div>
-
-
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /SECTION -->
-									
+							</div>
+						</form>
 
 
 		<!-- FOOTER -->
