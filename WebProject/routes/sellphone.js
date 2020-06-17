@@ -461,6 +461,92 @@ router.get('/intro', function(req, res, next) {
   });
 });
 
+router.get('/ask', function(req, res, next) {
+  pool.getConnection(function(err, connection){
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id=?";
+    connection.query(sqlForSelectList, req.cookies.user ,function(err, rows){
+      if(err) console.log(err);
+      res.render('ask', {user: rows});
+      connection.release();
+    });
+  });
+});
+
+router.get('/ask_read/:ask_id', function(req, res, next) {
+  var ask_id = req.params.ask_id;
+  pool.getConnection(function(err, connection){
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id=?";
+    connection.query(sqlForSelectList, req.cookies.user ,function(err, rows){
+      if(err) console.log(err);
+      var sqlForSelectList2 = "select * FROM tutorial.ask_list where ask_id=?";
+      connection.query(sqlForSelectList2, ask_id ,function(err, rowss){
+        if(err) console.log(err);
+        res.render('ask_read', {user: rows, ask:rowss});
+        connection.release();
+      });
+    });
+  });
+});
+
+router.post('/ask_read/:ask_id', function(req, res, next) {
+  var ask_id = req.params.ask_id;
+  console.log("!!!!!!!!!!!!!");
+  pool.getConnection(function(err, connection){
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id=?";
+    connection.query(sqlForSelectList, req.cookies.user ,function(err, rows){
+      if(err) console.log(err);
+      var ask_answer =req.body.ask_answer;
+      var ask_adate = new Date().toISOString().substr(0, 19).replace('T', ' ');
+      console.log([ask_answer,ask_adate,'답변 완료',ask_id]);
+      var sqlForSelectList2 = "update tutorial.ask_list set ask_answer=?, ask_adate=?, ask_state=? where ask_id=?";
+      connection.query(sqlForSelectList2, [ask_answer,ask_adate,'답변 완료',ask_id] ,function(err, rowss){
+        if(err) console.log(err);
+        res.redirect('/sellphone/ask_read/'+ask_id);
+        connection.release();
+      });
+    });
+  });
+});
+
+router.post('/ask', function(req, res, next) {
+  pool.getConnection(function(err, connection){
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id=?";
+    connection.query(sqlForSelectList, req.cookies.user ,function(err, rows){
+      if(err) console.log(err);
+      var ask_question = req.body.ask_question;
+      var ask_customer = req.cookies.user;
+      var ask_state = '답변대기';
+      var ask_answer = '';
+      var ask_qdate =  new Date().toISOString().substr(0, 19).replace('T', ' ');
+      var ask_adate = '';
+      var datas = [ask_question,ask_customer,ask_state,ask_answer,ask_qdate,ask_adate];
+      var sqlForSelectList2 = "INSERT INTO tutorial.ask_list(ask_question,ask_customer,ask_state,ask_answer,ask_qdate,ask_adate) VALUES (?,?,?,?,?,?)";
+      connection.query(sqlForSelectList2, datas ,function(err, rowss){
+        if(err) console.log(err);
+        console.log(datas);
+        res.redirect('/sellphone/ask_list');
+        connection.release();
+      });
+    });
+  });
+});
+
+router.get('/ask_list', function(req, res, next) {
+  // var customer_id = req.params.customer_id;
+  pool.getConnection(function(err, connection){
+
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id =?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+      var sqlForSelectList = "select * FROM tutorial.ask_list";
+      connection.query(sqlForSelectList, function(err, rowss){
+        if(err) console.log(err);
+        res.render('ask_list', {user: rows, ask:rowss});
+        connection.release();
+      });
+    });
+  });
+});
 
 router.post('/read_delete/:product_id', function(req, res, next) {
   var product_id = req.params.product_id;
