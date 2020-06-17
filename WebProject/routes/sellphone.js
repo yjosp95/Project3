@@ -385,10 +385,32 @@ router.post('/sell', upload.fields([{ name: 'img1' }, { name: 'img2' }, { name: 
         console.log(datas);
         if(err) console.log(err);
         console.log("rows : " + JSON.stringify(rowss));
-        
-        
+
+        var sqlForSelectList3 ="select * FROM tutorial.product_list WHERE product_img1 = ?";
+        connection.query(sqlForSelectList3,img1,function(err,rowsss){
+          // console.log(datass);
+          if(err) console.log(err);
+          // var deal_seller = rows[0].customer_id;
+          // var deal_buyer = '-';
+          // var deal_address = '-';
+          // var deal_name = '-';
+          // var deal_phone = '-';
+          // var deal_couier = '-';
+          // var deal_img1 = img1;
+          // var deal_title = req.body.product_name;
+          // var deal_price = req.body.price;
+          // var deal_tracking_nunber = '-';
+          // var deal_product = rowsss[0].product_id;
+          // var deal_date = '-';
+          // var datass = [deal_seller, deal_buyer, deal_address, deal_name ,deal_phone, deal_couier,deal_img1,deal_title,deal_price,deal_tracking_nunber,deal_product,deal_date];
+          // var sqlForSelectList4 ="INSERT INTO tutorial.deal_list(deal_seller, deal_buyer, deal_address, deal_name ,deal_phone, deal_couier,deal_img1,deal_title,deal_price,deal_tracking_nunber,deal_product,deal_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+          // connection.query(sqlForSelectList4,datass,function(err,rowssss){
+          //   console.log(datass);
+          //   if(err) console.log(err);
+          //   console.log("rows : " + JSON.stringify(rowssss));
             if(product_title != null) res.redirect('home');
             connection.release();
+          // });
         });
       });
     });
@@ -618,6 +640,78 @@ router.post('/read_update/:product_id',upload.fields([{ name: 'img1' }, { name: 
             res.redirect('/sellphone/read/'+product_id);
             connection.release();
         });
+      });
+    });
+  });
+});
+
+router.get('/announcement', function(req, res, next) {
+  // var customer_id = req.params.customer_id;
+  pool.getConnection(function(err, connection){
+
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id =?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+      var sqlForSelectList2 = "select * FROM tutorial.notice_list";
+      connection.query(sqlForSelectList2, function(err, rowss){
+        if(err) console.log(err);
+          res.render('announcement', {user: rows, notice:rowss});
+          connection.release();
+      });
+    });
+  });
+});
+
+router.get('/announcement_write', function(req, res, next) {
+  // var customer_id = req.params.customer_id;
+  pool.getConnection(function(err, connection){
+
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id =?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+      var sqlForSelectList = "select * FROM tutorial.notice_list";
+      connection.query(sqlForSelectList, function(err, rowss){
+        if(err) console.log(err);
+          res.render('announcement_write', {user: rows, notice:rowss});
+          connection.release();
+      });
+    });
+  });
+});
+
+router.post('/announcement_write', function(req, res, next) {
+  // var customer_id = req.params.customer_id;
+  pool.getConnection(function(err, connection){
+
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id =?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+      var notice_title = req.body.notice_title;
+      var notice_content = req.body.notice_content;
+      var notice_date = new Date().toISOString().substr(0, 10).replace('T', ' ');
+      var datas=[notice_title,notice_content,notice_date];
+      console.log(datas);
+      var sqlForSelectList = "INSERT INTO tutorial.notice_list(notice_title,notice_content,notice_date) VALUES (?,?,?)";
+      connection.query(sqlForSelectList,datas, function(err, rowss){
+        if(err) console.log(err);
+          res.redirect('announcement');
+          connection.release();
+      });
+    });
+  });
+});
+
+router.get('/announcement_read/:notice_id', function(req, res, next) {
+  var notice_id = req.params.notice_id;
+  pool.getConnection(function(err, connection){
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id =?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+      var sqlForSelectList2 = "select * FROM tutorial.notice_list where notice_id =?";
+      connection.query(sqlForSelectList2,notice_id, function(err, rowss){
+        if(err) console.log(err);
+        res.render('announcement_read', {user: rows, notice:rowss});
+        connection.release();
       });
     });
   });

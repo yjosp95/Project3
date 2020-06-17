@@ -1,0 +1,425 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		 <title>셀폰 - 중고 휴대폰 개인 거래</title>
+
+ 		<!-- Google font -->
+ 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+ 		<!-- Bootstrap -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/bootstrap.min.css"/>
+
+ 		<!-- Slick -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/slick.css"/>
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/slick-theme.css"/>
+
+ 		<!-- nouislider -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/nouislider.min.css"/>
+
+ 		<!-- Font Awesome Icon -->
+ 		<link rel="stylesheet" href="/electro/css/font-awesome.min.css">
+
+ 		<!-- Custom stlylesheet -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/style.css"/>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+
+        <meta http-equiv="Content-type" content="text/html; charset-euc-kr"/>
+        <title> table 태그에 대하여 </title>
+        <style type="text/css">
+          body{
+              font-family:"맑은 고딕";
+              font-size:1.5em;
+              color:#666;
+      }
+          a{
+              text-decoration:none;
+              color:#09f;
+      }
+          a:hover{
+      
+              text-decoration:underline;
+      }
+          caption{
+              display:none; /*안보이게 설정, 
+                                    화면에 보이지는 않지만 스크린리더리로 읽어짐.*/
+              
+          }
+          table{
+              width:1100px;
+              border-collapse:collapse;
+              border-top:2px solid #8d8d8d;
+      
+      }
+          th{
+              padding:10px 8px; /*padding: vertical horizontal;*/
+              background:#f9f9f9;
+              color:#666;
+              border-bottom:1px solid #8d8d8d;
+          }
+          
+          td{
+              padding:10px 8px; /*padding: vertical horizontal;*/
+              text-align:center;
+              line-height:1.25em;
+              color:#666;
+              border-bottom:1px solid #8d8d8d;
+          }
+      
+          td.article{ /*article 클래스가 적용된 열만 좌측 정렬*/
+              text-align:left;
+          }
+      
+          
+        </style>
+
+
+
+    </head>
+	<body>
+		<!-- HEADER -->
+		<header>
+						<!-- TOP HEADER -->
+                        <div id="top-header">
+                            <div class="container">
+                                <ul class="header-links pull-left">
+                                    <li><div style="color:white">셀폰 - 중고 휴대폰 개인 거래</div></li>
+                                </ul>
+                                <ul class="header-links pull-right">
+									<% if( user == null) { %>
+										<li><a href="/sellphone/login">로그인</a></li>
+										<li><a href="/ask_list">문의사항</a></li>
+									<% } else { %>
+										<form action="/sellphone/logout" method="post">
+											<li><button style="border:0; outline:0; background-color: #1E1F29;color:white;" type = "submit">로그아웃</button></li>
+											<li><a href="/ask_list">문의사항</a></li>
+										</form>
+									<% } %>	
+								</ul>
+                            </div>
+                        </div>
+                        <!-- /TOP HEADER -->
+
+			<!-- MAIN HEADER -->
+			<div id="header">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<!-- LOGO -->
+						<div class="col-md-3">
+							<div class="header-logo">
+								<a href="/sellphone/home" class="logo">
+									<img src="/electro/img/my_logo.png" alt="">
+								</a>
+							</div>
+						</div>
+						<!-- /LOGO -->
+
+						<!-- SEARCH BAR -->
+						<div class="col-md-6">
+							<div class="header-search">
+								<form>
+									<select class="input-select">
+										<option value="0">Sell Phone</option>
+										<option value="1">Category 01</option>
+										<option value="1">Category 02</option>
+									</select>
+									<input class="input" placeholder="HnB">
+									<button class="search-btn">Search</button>
+								</form>
+							</div>
+						</div>
+						<!-- /SEARCH BAR -->
+
+						<!-- ACCOUNT -->
+						<div class="col-md-3 clearfix">
+							<div class="header-ctn">
+								<!-- Wishlist -->
+								<div>
+									<% if( user == null) { %>
+										<a href="/sellphone/login">
+											<i class="fa fa-pencil-square-o"></i>
+											<span>상품 등록</span>
+											<div class="qty">1</div>
+										</a>
+									<% } else if(user!=null && user[0].customer_kind == 1) { %>
+									
+											<a href="/sellphone/member_manage">
+												<i class="fa fa-users"></i>
+												<span>회원관리</span>
+												<div class="qty">2</div>
+											</a>
+										
+									<% } else { %>
+										<a href="/sellphone/sell">
+											<i class="fa fa-pencil-square-o"></i>
+											<span>상품 등록</span>
+											<div class="qty">2</div>
+										</a>
+									<% } %>
+								</div>
+								<!-- /Wishlist -->
+
+
+
+								<!-- MYPAGE -->
+								<div>
+								
+									<% if( user == null) { %>
+										<a href="/sellphone/login" class="dropdown-toggle" aria-expanded="true">  <!-- data-toggle="dropdown"-->
+											<i class="fa fa-user-o"></i>
+											<span>마이페이지</span>
+											<div class="qty"></div>
+										</a>
+									<% } else if(user!=null && user[0].customer_kind == 1) { %>
+								
+										<a href="/sellphone/ask_list">
+											<i class="fa fa-question-circle-o"></i>
+											<span>문의사항</span>
+											<div class="qty">2</div>
+										</a>
+									<% } else { %>
+										<a href="/sellphone/mypage" class="dropdown-toggle" aria-expanded="true">  <!-- data-toggle="dropdown"-->
+											<i class="fa fa-user-o"></i>
+											<span>마이페이지</span>
+											<div class="qty"><%=user[0].customer_name%></div>
+										</a>
+									<% } %>
+								</div>
+								<!-- /MYPAGE -->
+
+								<!-- Menu Toogle -->
+								<div class="menu-toggle">
+									<a href="#">
+										<i class="fa fa-bars"></i>
+										<span>Menu</span>
+									</a>
+								</div>
+								<!-- /Menu Toogle -->
+							</div>
+						</div>
+						<!-- /ACCOUNT -->
+					</div>
+					<!-- row -->
+				</div>
+				<!-- container -->
+			</div>
+			<!-- /MAIN HEADER -->
+		</header>
+		<!-- /HEADER -->
+
+		<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<!-- /NAV -->
+				</div>
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
+
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="breadcrumb-header">공지사항</h3>
+						<ul class="breadcrumb-tree">
+                            <li><a href="/sellphone/home">Home</a></li>
+                            <li><a href="/sellphone/announcement">공지사항</a></li>
+                            <li class="active">공지조회</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<form action="/sellphone/ask" method="post">
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<div class="col-md-7">
+						<!-- Billing Details -->
+                        <div class="dataTbl1">
+    
+                            <table summary="공지사항 목록입니다.">
+                    
+                                <!--표의 제목-->
+                                <caption>공지사항</caption>
+                    
+                                <colgroup> 
+                                   <!--col태그는 표에서 하나 이상의 td태그에 대해 속성값을 정의-->
+                                   <!-- 여기서는 각 열의 크기를 지정-->
+                                    <col width="10%"/>
+                                    <col width="*"/>  <!--나머지 크기-->
+                                    <col width="14%"/>
+                                </colgroup>
+                    
+                                <!--테이블 머리말 부분-->
+                                <thead>
+                                    <th scope="번호">번호</th> 
+                                    <th scope="제목">제목</th>
+                                    <th scope="등록일">등록일</th>
+                    
+                                </thead>
+                    
+                                <!--테이블 내용 부분-->
+                                <tbody>
+                                    <tr>
+                                        <td><%= notice[0].notice_id%></td>
+                                        <td class="article"><a><%= notice[0].notice_title%></a></td>
+                                        <td><%= notice[0].notice_date%></td>
+                                    </tr>
+                                </tbody>
+
+                     
+                                <!--테이블 꼬리말-->
+                                <tfoot>
+                                    
+                                </tfoot>
+                            </table>
+                            
+                            <table border="1" width="200" height="250" >
+                                <tr>
+                                	<td style="text-align: left;"><%= notice[0].notice_content%></td>
+                                </tr>
+                            </table>
+							<p></p>
+							<a href="/announcement" class="primary-btn3 order-submit">목록으로</a>
+                        </div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		</form>
+		<!-- /SECTION -->
+
+		<!-- FOOTER -->
+		<footer id="footer">
+			<!-- top footer -->
+			<div class="section">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">About Us</h3>
+								<ul class="footer-links">
+									<li><a href="#"><i class="fa fa-map-marker"></i>Seoul, Korea</a></li>
+									<li><a href="#"><i class="fa fa-phone"></i>02-0000-0000</a></li>
+									<li><a href="#"><i class="fa fa-envelope-o"></i>HnB@gmail.com</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Categories</h3>
+								<ul class="footer-links">
+									<li><a href="#">Samsung</a></li>
+									<li><a href="#">Apple</a></li>
+									<li><a href="#">LG</a></li>
+									<li><a href="#">기타</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="clearfix visible-xs"></div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Service</h3>
+								<ul class="footer-links">
+									<li><a href="/intro">사이트 소개</a></li>
+									<li><a href="/announcement">공지사항</a></li>
+									<li><a href="/ask_list">문의사항</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">My Menu</h3>
+								<ul class="footer-links">
+									<li><a href="/mypage">마이페이지</a></li>
+									<li><a href="/sell">상품등록</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /top footer -->
+
+			<!-- bottom footer -->
+			<div id="bottom-footer" class="section">
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<span class="copyright">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy HnB
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</span>
+						</div>
+					</div>
+						<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /bottom footer -->
+		</footer>
+		<!-- /FOOTER -->
+
+		<!-- jQuery Plugins -->
+		<script src="/electro/js/jquery.min.js"></script>
+		<script src="/electro/js/bootstrap.min.js"></script>
+		<script src="/electro/js/slick.min.js"></script>
+		<script src="/electro/js/nouislider.min.js"></script>
+		<script src="/electro/js/jquery.zoom.min.js"></script>
+		<script src="/electro/js/main.js"></script>
+		<script>
+			function goBack() {			
+				window.history.back();			
+			}			
+		</script>
+		<script>
+			function loginfirst() {	
+				alert("로그인을 먼저 해주세요!");		
+				window.history.back();			
+			}			
+		</script>
+	</body>
+</html>
