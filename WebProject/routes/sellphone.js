@@ -737,5 +737,124 @@ router.get('/announcement_read/:notice_id', function(req, res, next) {
   });
 });
 
+router.get('/payment/:product_id', function(req, res, next) {
+  var product_id = req.params.product_id;
+  pool.getConnection(function(err, connection){
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id =?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+      var sqlForSelectLis2 = "select * FROM tutorial.product_list where product_id =?";
+      connection.query(sqlForSelectLis2,product_id, function(err, rowss){
+        if(err) console.log(err);
+          res.render('payment', {user: rows, product:rowss});
+          connection.release();
+      });
+    });
+  });
+});
+
+router.post('/payment/:product_id', function(req, res, next) {
+  var product_id = req.params.product_id;
+  pool.getConnection(function(err, connection){
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id =?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+      var sqlForSelectLis2 = "select * FROM tutorial.product_list where product_id =?";
+      connection.query(sqlForSelectLis2,product_id, function(err, rowss){
+        if(err) console.log(err);
+        
+          var check = req.body.point;
+          var product_trade;
+          if(check == null){
+            product_trade='직거래';
+          }
+          else{
+            product_trade='포인트거래';
+          }
+          var sqlForSelectLis4 = "update tutorial.product_list set product_state=?,product_trade=?, product_buyer=? where product_id=?";
+          connection.query(sqlForSelectLis4,['거래 중',product_trade,req.cookies.user, product_id], function(err, rowsss){
+            if(err) console.log(err);
+            var customer_wallet;
+            var customer_wait_money;
+            if(check==null){
+              customer_wallet = rows[0].customer_wallet;
+              customer_wait_money = 0;
+            }
+            else {
+              console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+              customer_wallet = parseInt(rows[0].customer_wallet,10) - parseInt(rowss[0].product_price,10);
+              customer_wait_money = rowss[0].product_price;
+            }
+            var sqlForSelectList5 = "update tutorial.joinform set customer_wallet=? where customer_id=?";
+            connection.query(sqlForSelectList5,[customer_wallet, req.cookies.user], function(err, rowsss){
+              if(err) console.log(err);
+              var sqlForSelectList6 = "select * FROM tutorial.joinform where customer_id =?";
+              connection.query(sqlForSelectList6,rowss[0].product_saler, function(err, rowssss){
+                if(err) console.log(err);
+                var sqlForSelectList7 = "update tutorial.joinform set customer_wait_money=? where customer_id=?";
+                connection.query(sqlForSelectList7,[parseInt(rowssss[0].customer_wait_money,10)+parseInt(customer_wait_money,10), rowss[0].product_saler], function(err, rowsss){
+                  if(err) console.log(err);
+                    res.redirect('/sellphone/read/'+product_id);
+                    connection.release();
+                });
+              });
+            });
+          });
+    
+      });
+    });
+  });
+});
+
+router.post('/trade/:product_id', function(req, res, next) {
+  var product_id = req.params.product_id;
+  pool.getConnection(function(err, connection){
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id =?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+      var sqlForSelectLis2 = "select * FROM tutorial.product_list where product_id =?";
+      connection.query(sqlForSelectLis2,product_id, function(err, rowss){
+        if(err) console.log(err);
+        var sqlForSelectList3 ="select * FROM tutorial.joinform where customer_id =?";
+        connection.query(sqlForSelectList3,rowss[0].product_buyer, function(err, rowsss){
+          if(err) console.log(err);  
+          var deal_buyer = rowsss[0].customer_id;
+          var deal_name = rowsss[0].customer_name;
+          var deal_phone = rowsss[0].customer_phone;
+          var deal_address = rowsss[0].customer_address;
+          var deal_date = new Date().toISOString().substr(0, 10).replace('T', ' ');
+          var deal_seller = rows[0].customer_id;
+          var deal_img1 = rowss[0].product_img1;
+          var deal_title = rowss[0].product_title;
+          var deal_price = rowss[0].product_price;
+          var deal_product = rowss[0].product_id;
+          var datas = [deal_seller, deal_buyer, deal_address, deal_name ,deal_phone, deal_img1,deal_title,deal_price,deal_product,deal_date];        
+          var sqlForSelectList4 ="INSERT INTO tutorial.deal_list(deal_seller, deal_buyer, deal_address, deal_name ,deal_phone,deal_img1,deal_title,deal_price,deal_product,deal_date) VALUES (?,?,?,?,?,?,?,?,?,?)";
+          connection.query(sqlForSelectList4,datas, function(err, rowsss){
+            if(err) console.log(err);          
+            var sqlForSelectList5 ="update tutorial.product_list set product_state=? where product_id=?";
+            connection.query(sqlForSelectList5,['거래 완료',product_id], function(err, rowsss){
+              if(err) console.log(err);
+              var trade_price;
+              if(rowss[0].product_trade == '직거래') {
+                trade_price = 0;
+              }         
+              else {
+                trade_price = deal_price;
+              }
+              var sqlForSelectList6 ="update tutorial.joinform set customer_wallet=?, customer_wait_money=? where customer_id=?";
+              connection.query(sqlForSelectList6,[parseInt(rows[0].customer_wallet,10)+parseInt(trade_price,10),parseInt(rows[0].customer_wait_money,10)-parseInt(trade_price,10),req.cookies.user], function(err, rowsss){
+                if(err) console.log(err);          
+                res.redirect('/sellphone/read/'+product_id);
+                connection.release();       
+              });         
+            });       
+          });      
+        });
+      });
+    });
+  });
+});
+
 
 module.exports = router;
