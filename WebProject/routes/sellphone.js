@@ -338,6 +338,26 @@ router.get('/mypage/update', function(req, res, next) {
     });
   });
 });
+
+router.post('/mypage/update', function(req, res, next) {
+  pool.getConnection(function(err, connection){
+    var pw = req.body.customer_pw;
+    var email = req.body.customer_email;
+    var name = req.body.customer_name;
+    var address = req.body.customer_address;
+    var phone = req.body.customer_phone;
+
+    var datas=[pw,email,name,address,phone,req.cookies.user];
+
+    var sqlForSelectList = "update tutorial.joinform set customer_pw=?, customer_email=?, customer_name=?, customer_address=?, customer_phone=? where customer_id=?";
+    connection.query(sqlForSelectList,datas, function(err, rows){
+      if(err) console.log(err);
+      res.redirect('/sellphone/mypage');
+      connection.release();
+    });
+  });
+});
+
 router.get('/sell', function(req, res, next) {
   pool.getConnection(function(err, connection){
 
