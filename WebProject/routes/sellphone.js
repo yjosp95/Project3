@@ -1396,4 +1396,67 @@ router.get('/member_mypage/:customer_id', function(req, res, next) {
   });
 });
 
+
+router.post('/review/:product_id', function(req, res, next) {
+  var product_id = req.params.product_id;
+  pool.getConnection(function(err, connection){
+    var sqlForSelectList = "select * FROM tutorial.joinform WHERE customer_id=?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+  //    console.log("@@@@@@@@@@@@@@@@@@@@@");
+      if(err) console.log(err);
+      var sqlForSelectList2 = "select * from tutorial.product_list where product_id=?";
+      connection.query(sqlForSelectList2,product_id,function(err, rowss){
+  //      console.log("#######");
+        if(err) console.error(err);
+        //var question_id
+        var review_content = req.body.review_content;
+        var review_date = new Date().toISOString().substr(0, 19).replace('T', ' ');
+        var review_star = req.body.rating;
+        var review_creator = rows[0].customer_id;
+        var review_saler = rowss[0].product_saler;
+        var review_target = rowss[0].product_title;
+        var datas = [review_content,review_date,review_star,review_creator,review_saler,review_target];
+  //      console.log(datas);
+        var sqlForSelectList3 = "INSERT INTO tutorial.review_list(review_content,review_date,review_star,review_creator,review_saler,review_target) VALUES (?,?,?,?,?,?)";
+        connection.query(sqlForSelectList3,datas,function(err,rowsss){
+     //     console.log(rowsss);
+          if(err) console.error(err);
+          var sqlForSelectList4 = "update tutorial.product_list set product_hit=? where product_id=?";
+          connection.query(sqlForSelectList4,[rowss[0].product_hit -1,rowss[0].product_id],function(err,rowssss){
+        //    console.log("@@@@@@@@@"+rowss[0].product_interest + 1);
+            if(err) console.error(err);
+            var sqlForSelectList5 = "select * from tutorial.review_list where review_saler=?";
+            connection.query(sqlForSelectList5,review_saler,function(err,rowsssss){
+              var sqlForSelectList6 = "select * from tutorial.joinform where customer_id=?";
+              connection.query(sqlForSelectList6,review_saler,function(err,rowssssss){
+                var customer_star1 = rowssssss[0].customer_star1;
+                var customer_star2 = rowssssss[0].customer_star2;
+                var customer_star3 = rowssssss[0].customer_star3;
+                var customer_star4 = rowssssss[0].customer_star4;
+                var customer_star5 = rowssssss[0].customer_star5;
+                console.log("@@@@@@@@@@@@@@@@"+review_star);
+                if(review_star == 1) {customer_star1 = customer_star1 + 1; }
+                else if(review_star == 2) {customer_star2 = customer_star2 + 1; }
+                else if(review_star == 3) {customer_star3 = customer_star3 + 1; }
+                else if(review_star == 4) {customer_star4 = customer_star4 + 1; }
+                else if(review_star == 5) {customer_star5 = customer_star5 + 1; }
+                var datass = [customer_star1,customer_star2,customer_star3,customer_star4,customer_star5,rowss[0].product_saler];
+                var sqlForSelectList7 = "update tutorial.joinform set customer_star1=?,customer_star2=?,customer_star3=?,customer_star4=?,customer_star5=? where customer_id=?";
+                connection.query(sqlForSelectList7,datass,function(err,rowsssssss){
+                  console.log(datass);
+                  if(err) console.error(err);
+                  res.redirect('/sellphone/read/'+rowss[0].product_id);
+                  connection.release();
+                });
+                // res.redirect('/sellphone/read/'+rowss[0].product_id);
+                // connection.release();
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+});
+
 module.exports = router;
