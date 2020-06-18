@@ -1375,4 +1375,25 @@ router.post('/stopcancel/:customer_id', function(req, res, next) {
   });
 });
 
+router.get('/member_mypage/:customer_id', function(req, res, next) {
+  var customer_id = req.params.customer_id;
+  pool.getConnection(function(err, connection){
+
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id =?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+
+      var sqlForSelectList = "select * FROM tutorial.joinform where customer_id =?";
+      connection.query(sqlForSelectList,customer_id, function(err, rowss){
+        if(err) console.log(err);
+
+          res.render('member_mypage', {user: rows, customer:rowss});
+          connection.release();
+
+      });
+
+    });
+  });
+});
+
 module.exports = router;
