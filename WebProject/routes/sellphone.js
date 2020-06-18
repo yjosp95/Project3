@@ -187,6 +187,10 @@ router.post('/login', function(req, res, next) {
           res.write("<script language=\"javascript\">alert('The ID does not exist or the password is incorrect!')</script>");
           res.write("<script language=\"javascript\">window.location=\"login\"</script>");
         }
+        else if(data[0].customer_kind==2){
+          res.write("<script language=\"javascript\">alert('Your ID is currently suspended, please contact the administrator.')</script>");
+          res.write("<script language=\"javascript\">window.location=\"login\"</script>");
+        }
 
         else{ //아이디가 있는 경우
            // 쿠키 설정
@@ -194,6 +198,7 @@ router.post('/login', function(req, res, next) {
             expires: new Date(Date.now() + 900000),
             httpOnly: true
           });
+          //if(req.cookies) console.log("@@@@@@"+req.cookies);
           res.redirect('/sellphone/home');
           connection.release();
         }
@@ -213,7 +218,7 @@ router.post('/login_n', function(req, res, next) {
           console.log(data);
           if(data == ""){ //아이디가 없는 경우
             res.write("<script language=\"javascript\">alert('The ID does not exist!')</script>");
-            res.write("<script language=\"javascript\">window.location=\"login_n\"</script>");
+            res.write("<script language=\"javascript\">window.location=\"login\"</script>");
           }
 
           else{ //아이디가 있는 경우
@@ -233,7 +238,9 @@ router.post('/login_n', function(req, res, next) {
 ///////////////////////// logout
 router.post('/logout', function(req, res, next) {
   res.clearCookie("user");
-  res.redirect('/home');
+  res.write("<script language=\"javascript\">alert('Success logout. Thank you!')</script>");
+  res.write("<script language=\"javascript\">window.location=\"home\"</script>");
+  //res.redirect('/home');
 });
 ////////////////////////
 
@@ -263,8 +270,8 @@ router.post('/joinform', function(req, res, next) {
           connection.query(sqlForInsertBoard, datas, function(err, rows){
               if(err) console.log(err);
               console.log(JSON.stringify(rows));
-              res.render('OK');
-              connection.release();
+              res.write("<script language=\"javascript\">alert('Complete!!')</script>");
+              res.write("<script language=\"javascript\">window.location=\"login\"</script>");
           });
         }
 
@@ -276,11 +283,15 @@ router.post('/joinform', function(req, res, next) {
     });
   });
 
-router.get('/OK', function(req, res, next) {
-  res.render('OK');
-  connection.release();
-});
-/* --------------- JYH --------------- */
+  router.get('/OK', function(req, res, next) {
+    res.render('OK');
+    connection.release();
+  });
+
+  router.post('/OK', function(req, res, next) {
+    res.render('home');
+    connection.release();
+  });
 
 router.get('/mypage', function(req, res, next) {
   pool.getConnection(function(err, connection){
@@ -302,13 +313,18 @@ router.get('/mypage', function(req, res, next) {
           connection.query(sqlForSelectList,req.cookies.user, function(err, rows4){
             if(err) console.log(err);
 
-            if(rows2=="") rows2=null;
-            if(rows3=="") rows3=null;
-            if(rows4=="") rows4=null;
+            sqlForSelectList = "select * FROM tutorial.product_list WHERE product_saler=?"; //찜 정보
+            connection.query(sqlForSelectList,req.cookies.user, function(err, rows5){
 
-            res.render('mypage', {user: rows, buy: rows2, sell: rows3, inter: rows4});
-            connection.release();
+              if(rows2=="") rows2=null;
+              if(rows3=="") rows3=null;
+              if(rows4=="") rows4=null;
+              if(rows5=="") rows5=null;
+
+              res.render('mypage', {user: rows, buy: rows2, sell: rows3, inter: rows4, state: rows5});
+              connection.release();
   //////////////////////////////////////////////////////////////////////////////////
+            });
           });
         });
       });
@@ -316,15 +332,6 @@ router.get('/mypage', function(req, res, next) {
     /* ---------- simple my information ---------- */
   });
 });
-
-/* --------------- JYH ing~ --------------- */
-
-
-
-
-
-
-
 
 router.get('/mypage/update', function(req, res, next) {
   pool.getConnection(function(err, connection){
@@ -354,6 +361,42 @@ router.post('/mypage/update', function(req, res, next) {
       if(err) console.log(err);
       res.redirect('/sellphone/mypage');
       connection.release();
+    });
+  });
+});
+
+router.get('/charge/:customer_id', function(req, res, next) {
+  var customer_id = req.params.customer_id;
+  pool.getConnection(function(err, connection){
+
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id =?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+
+        res.render('charge', {user: rows});
+        connection.release();
+
+    });
+  });
+});
+
+router.post('/charge/:customer_id', function(req, res, next) {
+  var customer_id = req.params.customer_id;
+  pool.getConnection(function(err, connection){
+
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id =?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+      var sqlForSelectList2 = "update tutorial.joinform set customer_wallet=? where customer_id=?";
+      connection.query(sqlForSelectList2,[parseInt(rows[0].customer_wallet,10)+parseInt(req.body.product_wallet,10),req.cookies.user], function(err, rows){
+        if(err) console.log(err);
+        res.write("<script language=\"javascript\">alert('Charge Success!!')</script>");
+        res.write("<script language=\"javascript\">window.location=history.go(-2)</script>");
+       // res.write("<script language=\"javascript\">window.location.href = document.referrer</script>");
+        //res.redirect('/home');
+        // history.back()
+        connection.release();
+      });
     });
   });
 });

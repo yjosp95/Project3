@@ -83,13 +83,15 @@
                 </div>
 
                 <div class="product-details">
-                  <div class="add-to-cart">
-
-										<a style="color: #8D99AE" id="join" href="/joinform"><b>회원가입</b></a>
-										<span class="bar" aria-hidden="true">|</span>
-                    <button type="submit" class="add-to-cart-btn"><i class="fa fa-user-o"></i>로그인</button>
-
-									</div>
+                  	<div class="add-to-cart">
+						<button type="submit" class="add-to-cart-btn"><i class="fa fa-user-o"></i>로그인</button>
+						<span class="bar" aria-hidden="true">|</span>
+						<a style="color: #8D99AE" href="/find_passwd"><b>비밀번호찾기</b></a>
+						<span class="bar" aria-hidden="true">|</span>
+						<a style="color: #8D99AE" id="join" href="/joinform"><b>회원가입</b></a>
+						<!-- <span class="bar" aria-hidden="true">|</span> -->
+						<!-- <button type="submit" class="add-to-cart-btn"><i class="fa fa-user-o"></i>로그인</button> -->
+					</div>
                 </div>
 								</form>
 
@@ -112,15 +114,28 @@
 											loginButton: {color: "white", type: 3, height: 60} /* 로그인 버튼의 타입을 지정 */
 										}
 									);
+
+									/* 설정정보를 초기화하고 연동을 준비 */
 									naverLogin.init();
+
 								</script>
+
+
+
+
+
+
 						</div>
 			</div>
 		</div>
 
+		<!-- FOOTER -->
 		<footer id="footer">
+			<!-- top footer -->
 			<div class="section">
+				<!-- container -->
 				<div class="container">
+					<!-- row -->
 					<div class="row">
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
@@ -151,9 +166,9 @@
 							<div class="footer">
 								<h3 class="footer-title">Service</h3>
 								<ul class="footer-links">
-									<li><a href="#">사이트 소개</a></li>
-									<li><a href="#">공지사항</a></li>
-									<li><a href="#">문의사항</a></li>
+									<li><a href="/intro">사이트 소개</a></li>
+									<li><a href="/announcement">공지사항</a></li>
+									<li><a href="/ask_list">문의사항</a></li>
 								</ul>
 							</div>
 						</div>
@@ -162,29 +177,36 @@
 							<div class="footer">
 								<h3 class="footer-title">My Menu</h3>
 								<ul class="footer-links">
-									<li><a href="#">마이페이지</a></li>
-									<li><a href="#">위시리스트</a></li>
-									<li><a href="#">구매내역</a></li>
-									<li><a href="#">판매내역</a></li>
+									<li><a href="/mypage">마이페이지</a></li>
+									<li><a href="/sell">상품등록</a></li>
 								</ul>
 							</div>
 						</div>
 					</div>
+					<!-- /row -->
 				</div>
+				<!-- /container -->
 			</div>
+			<!-- /top footer -->
 
-
+			<!-- bottom footer -->
 			<div id="bottom-footer" class="section">
 				<div class="container">
+					<!-- row -->
 					<div class="row">
 						<div class="col-md-12 text-center">
 							<span class="copyright">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 								Copyright &copy HnB
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</span>
 						</div>
 					</div>
+						<!-- /row -->
 				</div>
+				<!-- /container -->
 			</div>
+			<!-- /bottom footer -->
 		</footer>
 		<!-- /FOOTER -->
 
