@@ -1327,4 +1327,52 @@ router.post('/read_update/:product_id',upload.fields([{ name: 'img1' }, { name: 
   });
 });
 
+router.get('/member_manage', function(req, res, next) {
+  pool.getConnection(function(err, connection){
+
+    var sqlForSelectList = "select * FROM tutorial.joinform";
+    connection.query(sqlForSelectList, function(err, rows){
+      if(err) console.log(err);
+      res.render('member_manage', {user: rows});
+      connection.release();
+    });
+  });
+});
+
+router.post('/idstop/:customer_id', function(req, res, next) {
+  var customer_id = req.params.customer_id;
+  pool.getConnection(function(err, connection){
+
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id";
+    connection.query(sqlForSelectList,customer_id, function(err, rows){
+      if(err) console.log(err);
+      var sqlForSelectList = "update tutorial.joinform set customer_kind=? where customer_id=?";
+      connection.query(sqlForSelectList,[2,customer_id], function(err, rows){
+        if(err) console.log(err);
+        console.log(rows);
+        res.redirect('/sellphone/member_manage');
+        connection.release();
+      });
+    });
+  });
+});
+
+router.post('/stopcancel/:customer_id', function(req, res, next) {
+  var customer_id = req.params.customer_id;
+  pool.getConnection(function(err, connection){
+
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id";
+    connection.query(sqlForSelectList,customer_id, function(err, rows){
+      if(err) console.log(err);
+      var sqlForSelectList = "update tutorial.joinform set customer_kind=? where customer_id=?";
+      connection.query(sqlForSelectList,[0,customer_id], function(err, rows){
+        if(err) console.log(err);
+        console.log(rows);
+        res.redirect('/sellphone/member_manage');
+        connection.release();
+      });
+    });
+  });
+});
+
 module.exports = router;
