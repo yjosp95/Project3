@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Electro - HTML Ecommerce Template</title>
+		<title>셀폰 - 중고 휴대폰 개인 거래</title>
 
  		<!-- Google font -->
  		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -45,17 +45,17 @@
                                 <ul class="header-links pull-left">
                                     <li><div style="color:white">셀폰 - 중고 휴대폰 개인 거래</div></li>
                                 </ul>
-                                <ul class="header-links pull-right">
+								<ul class="header-links pull-right">
 									<% if( user == null) { %>
 										<li><a href="/sellphone/login">로그인</a></li>
+										<li><a href="/ask_list">문의사항</a></li>
 									<% } else { %>
 										<form action="/sellphone/logout" method="post">
 											<li><button style="border:0; outline:0; background-color: #1E1F29;color:white;" type = "submit">로그아웃</button></li>
-											<!-- <input type="">로그아웃 -->
+											<li><a href="/ask_list">문의사항</a></li>
 										</form>
-									<% } %>
-									<li><a href="#">고객센터</a></li>
-								</ul>
+									<% } %>	
+						   </ul>
                             </div>
                         </div>
                         <!-- /TOP HEADER -->
@@ -79,14 +79,16 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
-									<select class="input-select">
-										<option value="0">Sell Phone</option>
-										<option value="1">Category 01</option>
-										<option value="1">Category 02</option>
+								<form action="/sellphone/search" method="post" onsubmit="return onWriteSubmit()">
+									<select name="category" class="input-select">
+										<option value="ALL">ALL</option>
+										<option value="Samsung">SAMSUNG</option>
+										<option value="Apple">APPLE</option>
+										<option value="LG">LG</option>
+										<option value="기타">ETC</option>
 									</select>
-									<input class="input" placeholder="HnB">
-									<button class="search-btn">Search</button>
+									<input name="target" class="input" placeholder="HnB">
+									<button type="submit" class="search-btn">Search</button>
 								</form>
 							</div>
 						</div>
@@ -341,9 +343,9 @@
 							<div class="footer">
 								<h3 class="footer-title">Service</h3>
 								<ul class="footer-links">
-									<li><a href="#">사이트 소개</a></li>
-									<li><a href="#">공지사항</a></li>
-									<li><a href="#">문의사항</a></li>
+									<li><a href="/intro">사이트 소개</a></li>
+									<li><a href="/announcement">공지사항</a></li>
+									<li><a href="/ask_list">문의사항</a></li>
 								</ul>
 							</div>
 						</div>
@@ -352,10 +354,8 @@
 							<div class="footer">
 								<h3 class="footer-title">My Menu</h3>
 								<ul class="footer-links">
-									<li><a href="#">마이페이지</a></li>
-									<li><a href="#">위시리스트</a></li>
-									<li><a href="#">구매내역</a></li>
-									<li><a href="#">판매내역</a></li>
+									<li><a href="/mypage">마이페이지</a></li>
+									<li><a href="/sell">상품등록</a></li>
 								</ul>
 							</div>
 						</div>
