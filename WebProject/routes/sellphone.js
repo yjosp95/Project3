@@ -170,6 +170,211 @@ router.get('/home', function(req, res, next) {
 });
 /* END : GET HOME URL */
 
+/* GET SEARCH URL */
+router.get('/search', function(req, res, next) {
+
+  console.log(req.url);
+
+  var search_target = req.query.q;
+  var idx_page = req.query.page;
+  idx_page = Math.ceil(idx_page);
+  var search_category = req.query.category;
+  var search_order = req.query.order;
+
+  var sqlForSelectList = `SELECT * FROM product_list WHERE product_title LIKE \'%${search_target}%\'`;
+
+  if(req.query.category != 'ALL')
+    sqlForSelectList += ` AND product_manufacturer LIKE \'%${search_category}%\'`;
+
+
+  var html_sort;
+
+  if(search_order == 'date')
+  {
+    sqlForSelectList += ` ORDER BY product_id DESC`;
+
+    html_sort = `
+    <div style="text-align: right;"><select name="jump" onchange="location.href=this.value">
+      <option value="/sellphone/search/?q=${search_target}&page=1&category=${search_category}&order=date">최신순</option>
+      <option value="/sellphone/search/?q=${search_target}&page=1&category=${search_category}&order=hit">조회순</option>
+      <option value="/sellphone/search/?q=${search_target}&page=1&category=${search_category}&order=wish">찜순</option>
+    </select></div>
+    `;
+  }
+  else if(search_order == 'wish')
+  {
+    sqlForSelectList += ` ORDER BY product_interest DESC`;
+
+    html_sort = `
+    <div style="text-align: right;"><select name="jump" onchange="location.href=this.value">
+      <option value="/sellphone/search/?q=${search_target}&page=1&category=${search_category}&order=wish">찜순</option>
+      <option value="/sellphone/search/?q=${search_target}&page=1&category=${search_category}&order=date">최신순</option>
+      <option value="/sellphone/search/?q=${search_target}&page=1&category=${search_category}&order=hit">조회순</option>
+    </select></div>
+    `;
+  }
+  else if(search_order == 'hit')
+  {
+    sqlForSelectList += ` ORDER BY product_hit DESC`;
+
+    html_sort = `
+    <div style="text-align: right;"><select name="jump" onchange="location.href=this.value">
+      <option value="/sellphone/search/?q=${search_target}&page=1&category=${search_category}&order=hit">조회순</option>
+      <option value="/sellphone/search/?q=${search_target}&page=1&category=${search_category}&order=date">최신순</option>
+      <option value="/sellphone/search/?q=${search_target}&page=1&category=${search_category}&order=wish">찜순</option>
+    </select></div>
+    `;
+  }
+
+  console.log(sqlForSelectList);
+
+    pool.getConnection(function(err, connection){
+
+      var sqlForUserList = "select * FROM tutorial.joinform WHERE customer_id=?";
+      connection.query(sqlForUserList, req.cookies.user, function(err, user_row){
+      
+        connection.query(sqlForSelectList, function(err, rows){
+          if(err) console.log(err);
+  
+          var num_product = rows.length;
+          var num_page = Math.ceil(num_product / 6);
+  
+          if(idx_page > num_page)
+            idx_page = 1;
+  
+          // Make Product List
+          var html_product = `<div class="row">\n`;
+          var i_start = 6 * (idx_page-1);
+          var i_end = i_start;
+  
+          if(num_product-6 > i_start)
+            i_end = i_end + 6;
+          else
+            i_end = i_end + num_product - i_start;
+  
+          var i = i_start;
+
+          while(i < i_end)
+          {
+            html_product = html_product + 
+            ` <!-- product -->
+              <div class="col-md-4 col-xs-6">
+                <div class="product">
+                  <div class="product-img">
+                    <a href="/read/${rows[i].product_id}"><img src="/electro/img/${rows[i].product_img1}" alt="" height="350" width="350"></a>
+                    <div class="product-label"><span class="sale">SAFETY</span>`;
+  
+                      //<span class="sale">SAFETY</span>
+                      //<span class="new">NEW</span>
+  
+            html_product = html_product + `
+                    </div>
+                  </div>
+                  <div class="product-body">
+                    <p class="product-category">${rows[i].product_manufacturer}</p>
+                    <h3 class="product-name"><a href="/read/${rows[i].product_id}">${rows[i].product_title}</a></h3>
+                    <h4 class="product-price">${rows[i].product_price}원</h4>
+                  </div>
+                  <div class="add-to-cart">
+                    <form action="/payment/${rows[i].product_id}" method="get">
+                      <button class="add-to-cart-btn" type="submit"><i class="fa fa-shopping-cart"></i>구매하기</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!-- /product -->`;
+            
+            gap = i_start - i;
+  
+            if(gap > 0)
+            {
+              if(gap % 6 == 0)
+                html_product = html_product + `<div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>`;
+              else if(gap % 3 == 0)
+                html_product = html_product + `<div class="clearfix visible-lg visible-md"></div>`;
+              else if(gap % 2 == 0)
+                html_product = html_product + `<div class="clearfix visible-sm visible-xs"></div>`;
+            }
+  
+            i++;
+          }
+  
+          html_product = html_product + `</div>`;
+  
+          if(idx_page > 2)
+          {
+            var html_page = ` <li><a href="/sellphone/search/?q=${search_target}&page=${idx_page-2}&category=${search_category}&order=${search_order}">${idx_page-2}</a></li>
+                              <li><a href=/sellphone/search/?q=${search_target}&page=${idx_page-1}&category=${search_category}&order=${search_order}">${idx_page-1}</a></li>
+                              <li class="active">${idx_page}</li>`;
+  
+            if(num_page >= idx_page+1)
+            {
+              html_page = html_page + `<li><a href="/sellphone/search/?q=${search_target}&page=${idx_page+1}&category=${search_category}&order=${search_order}">${idx_page+1}</a></li>`;
+  
+              if(num_page >= idx_page+2)
+                html_page = html_page + `<li><a href="/sellphone/search/?q=${search_target}&page=${idx_page+2}&category=${search_category}&order=${search_order}">${idx_page+2}</a></li>`;
+            }
+          }
+          else
+          {
+            if(idx_page == 1)
+            {
+              var html_page = ` <li class="active">1</li>`;
+              console.log(idx_page);
+              console.log(num_page);
+  
+              if(num_page >= idx_page+1)
+              {
+                html_page = html_page + `<li><a href="/sellphone/search/?q=${search_target}&page=${idx_page+1}&category=${search_category}&order=${search_order}">${idx_page+1}</a></li>`;
+  
+                if(num_page >= idx_page+2)
+                  html_page = html_page + `<li><a href="/sellphone/search/?q=${search_target}&page=${idx_page+2}&category=${search_category}&order=${search_order}">${idx_page+2}</a></li>`;
+  
+                if(num_page >= idx_page+3)
+                  html_page = html_page + `<li><a href="/sellphone/search/?q=${search_target}&page=${idx_page+3}&category=${search_category}&order=${search_order}">${idx_page+3}</a></li>`;
+  
+                if(num_page >= idx_page+4)
+                  html_page = html_page + `<li><a href="/sellphone/search/?q=${search_target}&page=${idx_page+4}&category=${search_category}&order=${search_order}">${idx_page+4}</a></li>`;
+              }
+            }
+            else
+            {
+              var html_page = ` 
+                              <li><a href="/sellphone/search/?q=${search_target}&page=1&category=${search_category}&order=${search_order}">1</a></li>
+                              <li class="active">2</li>`;
+                              
+              if(num_page >= idx_page+1)
+              {
+                html_page = html_page + `<li><a href="/sellphone/search/?q=${search_target}&page=${idx_page+1}&category=${search_category}&order=${search_order}">${idx_page+1}</a></li>`;
+  
+                if(num_page >= idx_page+2)
+                  html_page = html_page + `<li><a href="/sellphone/search/?q=${search_target}&page=${idx_page+2}&category=${search_category}&order=${search_order}">${idx_page+2}</a></li>`;
+  
+                if(num_page >= idx_page+3)
+                  html_page = html_page + `<li><a href="/sellphone/search/?q=${search_target}&page=${idx_page+3}&category=${search_category}&order=${search_order}">${idx_page+3}</a></li>`;
+              }
+            }
+          }
+  
+          console.log(html_page);
+          res.render('search', {user: user_row, product: html_product, page: html_page, idx: idx_page, category:search_category, keyword: search_target, sort: html_sort});
+          connection.release();
+        });
+      });
+    });
+});
+/* END : GET SEARCH URL */
+
+/* POST SEARCH URL */
+router.post('/search', function(req, res, next) {
+  var search_target = req.body.target;
+  var search_category = req.body.category;
+
+  res.redirect(`/sellphone/search/?q=${search_target}&page=1&category=${search_category}&order=date`);
+  connection.release();
+});
+/* END : POST SEARCH URL */
+
 /* --------------- JYH --------------- */
 router.get('/login', function(req, res, next) {
   res.render('login');

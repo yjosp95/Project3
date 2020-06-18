@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<title>셀폰 - 중고 휴대폰 개인 거래</title>
+
+ 		<!-- Google font -->
+ 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+ 		<!-- Bootstrap -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/bootstrap.min.css"/>
+
+ 		<!-- Slick -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/slick.css"/>
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/slick-theme.css"/>
+
+ 		<!-- nouislider -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/nouislider.min.css"/>
+
+ 		<!-- Font Awesome Icon -->
+ 		<link rel="stylesheet" href="/electro/css/font-awesome.min.css">
+
+ 		<!-- Custom stlylesheet -->
+ 		<link type="text/css" rel="stylesheet" href="/electro/css/style.css"/>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    </head>
+	<body>
+		<!-- HEADER -->
+		<header>
+			<!-- TOP HEADER -->
+			<div id="top-header">
+				<div class="container">
+					<ul class="header-links pull-left">
+						<li><div style="color:white">셀폰 - 중고 휴대폰 개인 거래</div></li>
+					</ul>
+					<ul class="header-links pull-right">
+						<% if( user == null) { %>
+							<li><a href="/sellphone/login">로그인</a></li>
+							<li><a href="/ask_list">문의사항</a></li>
+						<% } else { %>
+							<form action="/sellphone/logout" method="post">
+								<li><button style="border:0; outline:0; background-color: #1E1F29;color:white;" type = "submit">로그아웃</button></li>
+								<li><a href="/ask_list">문의사항</a></li>
+							</form>
+						<% } %>	
+               </ul>
+				</div>
+			</div>
+			<!-- /TOP HEADER -->
+
+			<!-- MAIN HEADER -->
+			<div id="header">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<!-- LOGO -->
+						<div class="col-md-3">
+							<div class="header-logo">
+								<a href="/sellphone/home" class="logo">
+									<img src="/electro/img/my_logo.png" alt="">
+								</a>
+							</div>
+						</div>
+						<!-- /LOGO -->
+
+						<!-- SEARCH BAR -->
+						<div class="col-md-6">
+							<div class="header-search">
+								<form action="/sellphone/search" method="post" onsubmit="return onWriteSubmit()">
+									<select name="category" class="input-select">
+										<option value="ALL">ALL</option>
+										<option value="Samsung">SAMSUNG</option>
+										<option value="Apple">APPLE</option>
+										<option value="LG">LG</option>
+										<option value="기타">ETC</option>
+									</select>
+									<input name="target" class="input" placeholder="HnB">
+									<button type="submit" class="search-btn">Search</button>
+								</form>
+							</div>
+						</div>
+						<!-- /SEARCH BAR -->
+
+						<!-- ACCOUNT -->
+						<div class="col-md-3 clearfix">
+							<div class="header-ctn">
+								<!-- Wishlist -->
+								<div>
+									<% if( user == null) { %>
+										<a href="/sellphone/login">
+											<i class="fa fa-pencil-square-o"></i>
+											<span>상품등록</span>
+										</a>
+									<% } else if(user!=null && user[0].customer_kind == 1) { %>
+									
+											<a href="/sellphone/member_manage">
+												<i class="fa fa-users"></i>
+												<span>회원관리</span>
+											</a>
+										
+									<% } else { %>
+										<a href="/sellphone/sell">
+											<i class="fa fa-pencil-square-o"></i>
+											<span>상품등록</span>
+										</a>
+									<% } %>
+								</div>
+								<!-- /Wishlist -->
+
+								<!-- MyPage -->
+								<div>
+								
+									<% if( user == null) { %>
+										<a href="/sellphone/login" class="dropdown-toggle" aria-expanded="true">  <!-- data-toggle="dropdown"-->
+											<i class="fa fa-user-o"></i>
+											<span>마이페이지</span>
+										</a>
+									<% } else if(user!=null && user[0].customer_kind == 1) { %>
+								
+										<a href="/sellphone/ask_list">
+											<i class="fa fa-question-circle-o"></i>
+											<span>문의사항</span>
+										</a>
+									<% } else { %>
+										<a href="/sellphone/mypage" class="dropdown-toggle" aria-expanded="true">  <!-- data-toggle="dropdown"-->
+											<i class="fa fa-user-o"></i>
+											<span>마이페이지</span>
+										</a>
+									<% } %>
+								</div>
+								<!-- /MyPage -->
+							</div>
+						</div>
+						<!-- /ACCOUNT -->
+					</div>
+					<!-- row -->
+				</div>
+				<!-- container -->
+			</div>
+			<!-- /MAIN HEADER -->
+		</header>
+        <!-- /HEADER -->
+        
+        <!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="breadcrumb-header">검색결과</h3>
+						<ul class="breadcrumb-tree">
+							<li><a href="/sellphone/home">Home</a></li>
+							<li><a href="/sellphone/search/?q=&page=1&category=<%=category%>&order=date"><%=category%></a></li>
+							<li class="active"><%=keyword%></li>
+                        </ul>
+                        <input type="hidden" value="<%=sort%>" id='html_sort'/>
+						<div id='sort_list'></div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					 
+					<!-- STORE -->
+					<div id="store" class="col-md-12">
+						<!-- store products -->
+						<input type="hidden" value="<%=product%>" id='html_product'/>
+						<div id='product_list'></div>
+						<!-- /store products -->
+
+						<!-- store bottom filter -->
+						<div class="store-filter clearfix">
+							<ul class="store-pagination">
+								<input type="hidden" value="<%=page%>" id='html_page'/>
+								<div id='page_list'></div>
+							</ul>
+						</div>
+						<!-- /store bottom filter -->
+					</div>
+					<!-- /STORE -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		<!-- FOOTER -->
+		<footer id="footer">
+			<!-- top footer -->
+			<div class="section">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">About Us</h3>
+								<ul class="footer-links">
+									<li><a href="#"><i class="fa fa-map-marker"></i>Seoul, Korea</a></li>
+									<li><a href="#"><i class="fa fa-phone"></i>02-0000-0000</a></li>
+									<li><a href="#"><i class="fa fa-envelope-o"></i>HnB@gmail.com</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Categories</h3>
+								<ul class="footer-links">
+									<li><a href="/sellphone/search/?q=&page=1&category=Samsung&order=date">Samsung</a></li>
+									<li><a href="/sellphone/search/?q=&page=1&category=Apple&order=date">Apple</a></li>
+									<li><a href="/sellphone/search/?q=&page=1&category=LG&order=date">LG</a></li>
+									<li><a href="/sellphone/search/?q=&page=1&category=기타&order=date">ETC</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="clearfix visible-xs"></div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Service</h3>
+								<ul class="footer-links">
+									<li><a href="/intro">사이트 소개</a></li>
+									<li><a href="/announcement">공지사항</a></li>
+									<li><a href="/ask_list">문의사항</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">My Menu</h3>
+								<ul class="footer-links">
+									<% if( user == null) { %>
+										<li><a href="/sellphone/home">마이페이지</a></li>  <!-- data-toggle="dropdown"-->
+										<li><a href="/sellphone/home">상품등록</a></li>  <!-- data-toggle="dropdown"-->
+									<% } else if(user!=null && user[0].customer_kind == 1) { %>
+										<li><a href="/sellphone/member_manage">회원관리</a></li>
+										<li><a href="/sellphone/ask_list">문의사항</a></li>
+									<% } else { %>
+										<li><a href="/sellphone/mypage">마이페이지</a></li>  <!-- data-toggle="dropdown"-->
+										<li><a href="/sellphone/sell">상품등록</a></li>  <!-- data-toggle="dropdown"-->
+									<% } %>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /top footer -->
+
+			<!-- bottom footer -->
+			<div id="bottom-footer" class="section">
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<span class="copyright">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy HnB
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</span>
+						</div>
+					</div>
+						<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /bottom footer -->
+		</footer>
+		<!-- /FOOTER -->
+
+		<!-- jQuery Plugins -->
+		<script src="/electro/js/jquery.min.js"></script>
+		<script src="/electro/js/bootstrap.min.js"></script>
+		<script src="/electro/js/slick.min.js"></script>
+		<script src="/electro/js/nouislider.min.js"></script>
+		<script src="/electro/js/jquery.zoom.min.js"></script>
+		<script src="/electro/js/main.js"></script>
+
+		<script>
+			var html_product = document.getElementById('html_product').value;
+			var product_list = document.getElementById('product_list');
+			
+			product_list.innerHTML = html_product;
+
+			var html_page = document.getElementById('html_page').value;
+			var page_list = document.getElementById('page_list');
+			
+            page_list.innerHTML = html_page;
+            
+            var html_sort = document.getElementById('html_sort').value;
+			var sort_list = document.getElementById('sort_list');
+				
+			sort_list.innerHTML = html_sort;
+			
+		</script>
+	</body>
+</html>
