@@ -905,4 +905,76 @@ router.post('/trade/:product_id', function(req, res, next) {
 });
 
 
+router.post('/read_delete/:product_id', function(req, res, next) {
+  var product_id = req.params.product_id;
+  pool.getConnection(function(err, connection){
+    var sqlForSelectList = "delete FROM tutorial.product_list where product_id =?";
+    connection.query(sqlForSelectList,product_id, function(err, rows){
+      if(err) console.log(err);
+        res.redirect('/home');
+        connection.release();
+    });
+  });
+});
+
+router.get('/read_update/:product_id', function(req, res, next) {
+  var product_id = req.params.product_id;
+  pool.getConnection(function(err, connection){
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id =?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+
+      var sqlForSelectList2 = "select * FROM tutorial.product_list where product_id =?";
+      connection.query(sqlForSelectList2,product_id, function(err, rowss){
+        if(err) console.log(err);
+            res.render('read_update', {user: rows, product:rowss});
+            connection.release();
+      });
+    });
+  });
+});
+
+router.post('/read_update/:product_id',upload.fields([{ name: 'img1' }, { name: 'img2' }, { name: 'img3' }]), function(req, res, next) {
+  var product_id = req.params.product_id;
+  pool.getConnection(function(err, connection){
+    var sqlForSelectList = "select * FROM tutorial.joinform where customer_id =?";
+    connection.query(sqlForSelectList,req.cookies.user, function(err, rows){
+      if(err) console.log(err);
+
+      var sqlForSelectList2 = "select * FROM tutorial.product_list where product_id =?";
+      connection.query(sqlForSelectList2,product_id, function(err, rowss){
+        if(err) console.log(err);
+        var product_manufacturer = req.body.manufacturer;
+        var product_title = req.body.product_name;
+        var product_description = req.body.product_info;
+        var product_price = req.body.price;
+        var product_status = req.body.status;
+        var product_trade_facetoface = req.body.trade_facetoface;
+        var product_trade_point = req.body.trade_point;
+        var product_date = new Date().toISOString().substr(0, 10).replace('T', ' ');
+        var product_color = req.body.product_color;
+        var product_storage = req.body.product_storage;
+        var img1=null;//rowss[0].product_img1;
+        var img2=null;//rowss[0].product_img2;
+        var img3=null;//rowss[0].product_img3;
+        console.log("!!!!!!!!!!");
+        // console.log(req.body);
+        if(req.files.img1 == null) img1=rowss[0].product_img1;
+        else img1=req.files.img1[0].filename;
+        if(req.files.img2 == null) img2=rowss[0].product_img2;
+        else img2=req.files.img2[0].filename;
+        if(req.files.img3 == null) img3=rowss[0].product_img3;
+        else img3=req.files.img3[0].filename;
+        var datas = [product_manufacturer, product_title, product_description, product_price, product_status, product_trade_facetoface, product_trade_point, product_date, product_color,product_storage,img1,img2,img3,product_id];
+        var sqlForSelectList3 = "update tutorial.product_list set product_manufacturer=?, product_title=?, product_description=?, product_price=?, product_status=?, product_trade_facetoface=?, product_trade_point=?, product_date=?, product_color=?,product_storage=?,product_img1=?,product_img2=?,product_img3=? where product_id=?";
+        connection.query(sqlForSelectList3,datas, function(err, rowsss){
+          if(err) console.log(err);
+            res.redirect('/sellphone/read/'+product_id);
+            connection.release();
+        });
+      });
+    });
+  });
+});
+
 module.exports = router;
